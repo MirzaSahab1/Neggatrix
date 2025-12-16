@@ -13,7 +13,7 @@ namespace Neggatrix.Interfaces
 
         void Start();
 
-        void Update();
+        void Update(float deltaTime);
 
         void Destroy();
     }

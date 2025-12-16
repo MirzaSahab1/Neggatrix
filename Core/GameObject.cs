@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using Negatrix.Interfaces;
+using Neggatrix.Interfaces;
 
 namespace Neggatrix.Core
 {
@@ -11,10 +11,13 @@ namespace Neggatrix.Core
     {
         private List<IComponent> _components = new List<IComponent>();
 
-        public void AddComponent(IComponent component)
+        public T AddComponent<T>() where T : IComponent, new()
         {
+            T component = new T{ Owner = this};
             component.Owner = this;
             _components.Add(component);
+            component.Start();
+            return component;
         }
 
         public void RemoveComponent(IComponent component)
@@ -25,6 +28,23 @@ namespace Neggatrix.Core
         public T GetComponent<T>()
         {
             return _components.OfType<T>().FirstOrDefault();
+        }
+        public void Update(float deltaTime)
+        {
+            foreach (var component in _components)
+            {
+                component.Update(deltaTime);
+            }
+        }
+        public void Render(System.Drawing.Graphics g)
+        {
+            foreach (var component in _components)
+            {
+                if (component is IRenderable renderable)
+                {
+                    renderable.Render(g);
+                }
+            }
         }
     }
 }

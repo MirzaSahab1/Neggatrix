@@ -14,5 +14,19 @@ namespace Neggatrix.Core
         {
             Objects.Add(obj);
         }
+        public void Update(float deltaTime)
+        {
+            foreach (var go in Objects)
+            {
+                go.Update(deltaTime);
+            }
+        }
+        public void Render(Graphics g)
+        {
+            foreach (var go in Objects)
+            {
+                go.Render(g);
+            }
+        }
     }
 }
