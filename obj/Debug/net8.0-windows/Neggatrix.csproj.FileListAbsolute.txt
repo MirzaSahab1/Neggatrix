@@ -1,0 +1,16 @@
+D:\Neggatrix\Neggatrix\bin\Debug\net8.0-windows\Neggatrix.exe
+D:\Neggatrix\Neggatrix\bin\Debug\net8.0-windows\Neggatrix.deps.json
+D:\Neggatrix\Neggatrix\bin\Debug\net8.0-windows\Neggatrix.runtimeconfig.json
+D:\Neggatrix\Neggatrix\bin\Debug\net8.0-windows\Neggatrix.dll
+D:\Neggatrix\Neggatrix\bin\Debug\net8.0-windows\Neggatrix.pdb
+D:\Neggatrix\Neggatrix\obj\Debug\net8.0-windows\Neggatrix.MainForm.resources
+D:\Neggatrix\Neggatrix\obj\Debug\net8.0-windows\Neggatrix.csproj.GenerateResource.cache
+D:\Neggatrix\Neggatrix\obj\Debug\net8.0-windows\Neggatrix.GeneratedMSBuildEditorConfig.editorconfig
+D:\Neggatrix\Neggatrix\obj\Debug\net8.0-windows\Neggatrix.AssemblyInfoInputs.cache
+D:\Neggatrix\Neggatrix\obj\Debug\net8.0-windows\Neggatrix.AssemblyInfo.cs
+D:\Neggatrix\Neggatrix\obj\Debug\net8.0-windows\Neggatrix.csproj.CoreCompileInputs.cache
+D:\Neggatrix\Neggatrix\obj\Debug\net8.0-windows\Neggatrix.dll
+D:\Neggatrix\Neggatrix\obj\Debug\net8.0-windows\refint\Neggatrix.dll
+D:\Neggatrix\Neggatrix\obj\Debug\net8.0-windows\Neggatrix.pdb
+D:\Neggatrix\Neggatrix\obj\Debug\net8.0-windows\Neggatrix.genruntimeconfig.cache
+D:\Neggatrix\Neggatrix\obj\Debug\net8.0-windows\ref\Neggatrix.dll
