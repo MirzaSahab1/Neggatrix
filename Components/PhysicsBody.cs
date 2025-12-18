@@ -25,11 +25,19 @@ namespace Neggatrix.Components
             Owner = null!;
             Velocity = new PointF(0.0f, 0.0f);
             Mass = 1.0f;
-            Friction = 1f;
+            Friction = 0.9f;
             GravityScale = 1.0f;
         }
 
+        public void AddForce(PointF force)
+        {
+            // a = F / m
+            float accX = force.X / Mass;
+            float accY = force.Y / Mass;
 
+            // We add this acceleration directly to our current velocity
+            Velocity = new PointF(Velocity.X + accX, Velocity.Y + accY);
+        }
         public void Start() { }
         public void Update(float deltaTime)
         {
@@ -49,10 +57,8 @@ namespace Neggatrix.Components
                 transform.Position.Y + Velocity.Y * deltaTime
             );
 
-            Velocity = new PointF(
-                Velocity.X * Friction * deltaTime,
-                Velocity.Y
-            );
+            float frictionFactor = MathF.Pow(Friction, deltaTime * 10);
+            Velocity = new PointF(Velocity.X * frictionFactor, Velocity.Y * frictionFactor);
             foreach (var otherGO in Owner.Scene.Objects)
             {
                 if (otherGO == Owner) continue;
@@ -60,7 +66,7 @@ namespace Neggatrix.Components
                 var otherCollider = otherGO.GetComponent<BoxCollider>();
                 if (otherCollider != null)
                 {
-                    if (myCollider.Bounds.IntersectsWith(otherCollider.Bounds))
+                    if (myCollider.Bounds.IntersectsWith(otherCollider.Bounds) && !otherCollider.IsTrigger)
                     {
                         // Simple Resolution: Stop falling if we hit something from above
                         if (Velocity.Y > 0 && myCollider.Bounds.Bottom > otherCollider.Bounds.Top)

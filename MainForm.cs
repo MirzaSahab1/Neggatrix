@@ -35,7 +35,10 @@ namespace Neggatrix
         PhysicsBody physics;
         public void Start()
         {
+            // Game
             game = new Game();
+
+            // Player
             GameObject square = new GameObject();
 
             transform = square.AddComponent<Transform>();
@@ -50,22 +53,36 @@ namespace Neggatrix
             collider.Size = renderer.Size;
 
             physics = square.AddComponent<PhysicsBody>();
+            physics.Friction = 0.8f;
 
             game.AddObject(square);
 
+            // Floor
             GameObject floor = new GameObject();
             var floorTransform = floor.AddComponent<Transform>();
-            floorTransform.Position = new PointF(300, 800);
-            floorTransform.Rotation = 0;
+            floorTransform.Position = new PointF(0, Height);
+            
 
             var floorRenderer = floor.AddComponent<Renderer>();
             floorRenderer.BGColor = Color.Green;
-            floorRenderer.Size = new SizeF(400, 50);
+            floorRenderer.Size = new SizeF(2000, 50);
 
             var floorCollider = floor.AddComponent<BoxCollider>();
             floorCollider.Size = floorRenderer.Size;
+            floorCollider.IsTrigger = false;
 
             game.AddObject(floor);
+
+            // Wall
+            GameObject wall = new GameObject();
+            var wallTransform = wall.AddComponent<Transform>();
+            wallTransform.Position = new PointF(Width, Height);
+            var wallRenderer = wall.AddComponent<Renderer>();
+            wallRenderer.BGColor = Color.Blue;
+            wallRenderer.Size = new SizeF(200, 200);
+            var wallCollider = wall.AddComponent<BoxCollider>();
+            wallCollider.Size = wallRenderer.Size;
+            game.AddObject(wall);
         }
         private void GameLoop(object? sender, EventArgs? e)
         {
@@ -79,10 +96,17 @@ namespace Neggatrix
 
                 while (accumulator >= targetDeltaTime)
                 {
-                    if (Input.IsPressed(Keys.Space))
+                    if (Input.IsPressed(Keys.W))
                     {
-                        transform.Position = new PointF(150, 100);
-                        physics.Velocity = new PointF(0, 0);
+                        physics.AddForce(new PointF(0, -1000));
+                    }
+                    if (Input.IsDown(Keys.A))
+                    {
+                        physics.AddForce(new PointF(-100, 0));
+                    }
+                    if (Input.IsDown(Keys.D))
+                    {
+                        physics.AddForce(new PointF(100, 0));
                     }
 
 
