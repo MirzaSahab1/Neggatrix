@@ -31,10 +31,11 @@ namespace Neggatrix.Components
 
 
         public void Start() { }
-        public void Update(float deltaTime) 
+        public void Update(float deltaTime)
         {
             var transform = Owner.GetComponent<Transform>();
-            if (transform == null) return;
+            var myCollider = Owner.GetComponent<BoxCollider>();
+            if (transform == null || myCollider == null) return;
 
             // Apply gravity
             float gravityForce = Utils.GlobalGravity * GravityScale * Mass;
@@ -50,8 +51,31 @@ namespace Neggatrix.Components
 
             Velocity = new PointF(
                 Velocity.X * Friction * deltaTime,
-                Velocity.Y 
+                Velocity.Y
             );
+            foreach (var otherGO in Owner.Scene.Objects)
+            {
+                if (otherGO == Owner) continue;
+
+                var otherCollider = otherGO.GetComponent<BoxCollider>();
+                if (otherCollider != null)
+                {
+                    if (myCollider.Bounds.IntersectsWith(otherCollider.Bounds))
+                    {
+                        // Simple Resolution: Stop falling if we hit something from above
+                        if (Velocity.Y > 0 && myCollider.Bounds.Bottom > otherCollider.Bounds.Top)
+                        {
+                            Velocity = new PointF(Velocity.X, 0);
+                            // Snap to the top of the other object
+                            transform.Position = new PointF(
+                                transform.Position.X,
+                                otherCollider.Bounds.Top - (myCollider.Size.Height * (1 - transform.Pivot.Y))
+                            );
+                        }
+                    }
+                }
+            }
+
         }
         public void Destroy() { }
 

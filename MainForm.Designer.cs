@@ -34,9 +34,11 @@
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
-            ClientSize = new Size(800, 450);
+            ClientSize = new Size(800, 713);
             Name = "MainForm";
             Text = "Game";
+            KeyDown += MainForm_KeyDown;
+            KeyUp += MainForm_KeyUp;
             ResumeLayout(false);
         }
 

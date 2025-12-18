@@ -2,6 +2,19 @@
   "version": 3,
   "targets": {
     "net8.0-windows7.0": {
+      "EZInput/1.3.2": {
+        "type": "package",
+        "compile": {
+          "lib/netstandard2.0/EZInput.dll": {
+            "related": ".xml"
+          }
+        },
+        "runtime": {
+          "lib/netstandard2.0/EZInput.dll": {
+            "related": ".xml"
+          }
+        }
+      },
       "Microsoft.AspNet.WebApi.Client/5.2.7": {
         "type": "package",
         "dependencies": {
@@ -1787,6 +1800,19 @@
     }
   },
   "libraries": {
+    "EZInput/1.3.2": {
+      "sha512": "/upsIA5CsMN/AEWRV/Fu2UAilOfCIPMEJxCyx00qaChqJwt4f6q2OPPLWmluUUE2hmuKn035BoV4/kItbb+CXQ==",
+      "type": "package",
+      "path": "ezinput/1.3.2",
+      "files": [
+        ".nupkg.metadata",
+        ".signature.p7s",
+        "ezinput.1.3.2.nupkg.sha512",
+        "ezinput.nuspec",
+        "lib/netstandard2.0/EZInput.dll",
+        "lib/netstandard2.0/EZInput.xml"
+      ]
+    },
     "Microsoft.AspNet.WebApi.Client/5.2.7": {
       "sha512": "/76fAHknzvFqbznS6Uj2sOyE9rJB3PltY+f53TH8dX9RiGhk02EhuFCWljSj5nnqKaTsmma8DFR50OGyQ4yJ1g==",
       "type": "package",
@@ -5957,6 +5983,7 @@
   },
   "projectFileDependencyGroups": {
     "net8.0-windows7.0": [
+      "EZInput >= 1.3.2",
       "Microsoft.VisualStudio.Services.Client >= 19.225.1",
       "Topshelf >= 4.3.0"
     ]
@@ -6011,6 +6038,10 @@
       "net8.0-windows7.0": {
         "targetAlias": "net8.0-windows",
         "dependencies": {
+          "EZInput": {
+            "target": "Package",
+            "version": "[1.3.2, )"
+          },
           "Microsoft.VisualStudio.Services.Client": {
             "target": "Package",
             "version": "[19.225.1, )"

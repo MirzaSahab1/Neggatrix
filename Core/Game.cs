@@ -8,10 +8,11 @@ namespace Neggatrix.Core
 {
     public class Game
     {
-        private List<GameObject> Objects = new List<GameObject>();
+        public List<GameObject> Objects = new List<GameObject>();
 
         public void AddObject(GameObject obj)
         {
+            obj.Scene = this;
             Objects.Add(obj);
         }
         public void Update(float deltaTime)

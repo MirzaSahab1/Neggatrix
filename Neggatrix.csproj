@@ -9,6 +9,7 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <PackageReference Include="EZInput" Version="1.3.2" />
     <PackageReference Include="Microsoft.VisualStudio.Services.Client" Version="19.225.1" />
     <PackageReference Include="Topshelf" Version="4.3.0" />
   </ItemGroup>

@@ -9,6 +9,7 @@ namespace Neggatrix.Core
 {
     public class GameObject
     {
+        public Game? Scene { get; set; }
         private List<IComponent> _components = new List<IComponent>();
 
         public T AddComponent<T>() where T : IComponent, new()
