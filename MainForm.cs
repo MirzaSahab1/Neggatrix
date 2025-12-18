@@ -69,7 +69,6 @@ namespace Neggatrix
 
             var floorCollider = floor.AddComponent<BoxCollider>();
             floorCollider.Size = floorRenderer.Size;
-            floorCollider.IsTrigger = false;
 
             game.AddObject(floor);
 

@@ -68,15 +68,48 @@ namespace Neggatrix.Components
                 {
                     if (myCollider.Bounds.IntersectsWith(otherCollider.Bounds) && !otherCollider.IsTrigger)
                     {
-                        // Simple Resolution: Stop falling if we hit something from above
-                        if (Velocity.Y > 0 && myCollider.Bounds.Bottom > otherCollider.Bounds.Top)
+                        RectangleF myBounds = myCollider.Bounds;
+                        RectangleF otherBounds = otherCollider.Bounds;
+
+                        RectangleF intersection = RectangleF.Intersect(myBounds, otherBounds);
+
+                        if (intersection.Width < intersection.Height)
+                        {
+                            Velocity = new PointF(0, Velocity.Y);
+
+                            if (myBounds.Left < otherBounds.Left) 
+                            {
+                                transform.Position = new PointF(
+                                    otherBounds.Left - (myBounds.Width * (1 - transform.Pivot.X)),
+                                    transform.Position.Y
+                                );
+                            }
+                            else 
+                            {
+                                transform.Position = new PointF(
+                                    otherBounds.Right + (myBounds.Width * transform.Pivot.X),
+                                    transform.Position.Y
+                                );
+                            }
+                        }
+                        else 
                         {
                             Velocity = new PointF(Velocity.X, 0);
-                            // Snap to the top of the other object
-                            transform.Position = new PointF(
-                                transform.Position.X,
-                                otherCollider.Bounds.Top - (myCollider.Size.Height * (1 - transform.Pivot.Y))
-                            );
+
+                            if (myBounds.Top < otherBounds.Top) 
+                            {
+                                transform.Position = new PointF(
+                                    transform.Position.X,
+                                    otherBounds.Top - (myBounds.Height * (1 - transform.Pivot.Y))
+                                );
+                            }
+                            else 
+                            {
+                                transform.Position = new PointF(
+                                    transform.Position.X,
+                                    otherBounds.Bottom + (myBounds.Height * transform.Pivot.Y)
+                                );
+                            }
                         }
                     }
                 }
