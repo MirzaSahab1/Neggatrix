@@ -32,11 +32,13 @@ namespace Neggatrix.Components
         public void AddForce(PointF force)
         {
             // a = F / m
-            float accX = force.X / Mass;
-            float accY = force.Y / Mass;
+            PointF acc = new PointF(
+                force.X / Mass, 
+                force.Y * Mass
+            );
 
             // We add this acceleration directly to our current velocity
-            Velocity = new PointF(Velocity.X + accX, Velocity.Y + accY);
+            Velocity = new PointF(Velocity.X + acc.X, Velocity.Y + acc.Y);
         }
         public void Start() { }
         public void Update(float deltaTime)
@@ -58,7 +60,7 @@ namespace Neggatrix.Components
             );
 
             float frictionFactor = MathF.Pow(Friction, deltaTime * 10);
-            Velocity = new PointF(Velocity.X * frictionFactor, Velocity.Y * frictionFactor);
+            Velocity = new PointF(Velocity.X * frictionFactor, Velocity.Y );
             foreach (var otherGO in Owner.Scene.Objects)
             {
                 if (otherGO == Owner) continue;

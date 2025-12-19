@@ -12,6 +12,7 @@ namespace Neggatrix.Core
         public Game? Scene { get; set; }
         private List<IComponent> _components = new List<IComponent>();
 
+        
         public T AddComponent<T>() where T : IComponent, new()
         {
             T component = new T{ Owner = this};

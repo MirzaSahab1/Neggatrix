@@ -9,6 +9,7 @@ using System.ServiceProcess;
 using System.Runtime.InteropServices;
 using Neggatrix.Common;
 using EZInput;
+using Neggatrix.Presets;
 
 namespace Neggatrix
 {
@@ -39,7 +40,7 @@ namespace Neggatrix
             game = new Game();
 
             // Player
-            GameObject square = new GameObject();
+            /*GameObject square = new GameObject();
 
             transform = square.AddComponent<Transform>();
             transform.Position = new PointF(150, 100);
@@ -53,9 +54,10 @@ namespace Neggatrix
             collider.Size = renderer.Size;
 
             physics = square.AddComponent<PhysicsBody>();
-            physics.Friction = 0.8f;
-
-            game.AddObject(square);
+            physics.Friction = 0.8f;*/
+            Player player = new Player();
+            physics = player.GetComponent<PhysicsBody>();
+            game.AddObject(player);
 
             // Floor
             GameObject floor = new GameObject();
