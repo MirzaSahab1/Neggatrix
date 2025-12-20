@@ -33,12 +33,13 @@ namespace Neggatrix
             Start();
         }
         PhysicsBody? physics;
+        Player player;
         public void Start()
         {
             // Game
             game = new Game();
 
-            Player player = new Player();
+            player = new Player();
             physics = player.GetComponent<PhysicsBody>();
             game.AddObject(player);
 
@@ -93,6 +94,14 @@ namespace Neggatrix
                         if (Input.IsDown(Keys.D))
                         {
                             physics.AddForce(new PointF(100, 0));
+                        }
+                        if (Input.IsPressed(Keys.E))
+                        {
+                            var camera = player.GetComponent<Camera>();
+                            if (camera != null)
+                            {
+                                camera.ShakeIntensity = 100;
+                            }
                         }
                     }
 

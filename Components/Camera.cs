@@ -13,10 +13,19 @@ namespace Neggatrix.Components
     {
         public required GameObject Owner { get; set; }
 
+        public float Zoom { get; set; }
+        public float Smoothing { get; set; }
+        public float ShakeIntensity { get; set; }
+
+        public PointF Position { get; private set; }
+
         [SetsRequiredMembers]
         public Camera()
         {
             Owner = null!;
+            Zoom = 1.0f;
+            Smoothing = 5f;
+            ShakeIntensity = 0.0f;
         }
 
         public PointF GetOffset(int screenWidth, int screenHeight)
@@ -31,8 +40,28 @@ namespace Neggatrix.Components
             return new PointF(offsetX, offsetY);
         }
 
-        public void Start() { }
-        public void Update(float deltaTime) { }
+        public void Start() 
+        {
+            var target = Owner.GetComponent<Transform>();
+            if (target != null) Position = target.Position;
+        }
+        public void Update(float deltaTime) 
+        {
+            var target = Owner.GetComponent<Transform>();
+            if (target == null) return;
+
+            float weight = Smoothing * deltaTime;
+            Position = new PointF(
+                Position.X + (target.Position.X - Position.X) * weight,
+                Position.Y + (target.Position.Y - Position.Y) * weight
+            );
+            if (ShakeIntensity > 0.0f)
+            {
+                ShakeIntensity -= deltaTime * 10f;
+                if (ShakeIntensity < 0.0f) ShakeIntensity = 0.0f;
+            }
+
+        }
         public void Destroy() { }
     }
 }

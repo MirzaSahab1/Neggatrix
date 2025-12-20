@@ -29,9 +29,12 @@ namespace Neggatrix.Core
             var camera = cameraObj?.GetComponent<Camera>();
             if (camera != null)
             {
-                PointF offset = camera.GetOffset(viewWidth, viewHeight);
+                //PointF offset = camera.GetOffset(viewWidth, viewHeight);
 
-                g.TranslateTransform(offset.X, offset.Y);
+                //g.TranslateTransform(offset.X, offset.Y);
+                g.TranslateTransform(viewWidth / 2, viewHeight / 2);
+                g.ScaleTransform(camera.Zoom, camera.Zoom);
+                g.TranslateTransform(-camera.Position.X, -camera.Position.Y);
             }
             foreach (var go in Objects)
             {
