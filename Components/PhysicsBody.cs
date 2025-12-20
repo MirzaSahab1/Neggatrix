@@ -37,7 +37,6 @@ namespace Neggatrix.Components
                 force.Y * Mass
             );
 
-            // We add this acceleration directly to our current velocity
             Velocity = new PointF(Velocity.X + acc.X, Velocity.Y + acc.Y);
         }
         public void Start() { }
@@ -61,6 +60,8 @@ namespace Neggatrix.Components
 
             float frictionFactor = MathF.Pow(Friction, deltaTime * 10);
             Velocity = new PointF(Velocity.X * frictionFactor, Velocity.Y );
+
+            // Process Collisions, Unoptimized at the moment
             foreach (var otherGO in Owner.Scene.Objects)
             {
                 if (otherGO == Owner) continue;

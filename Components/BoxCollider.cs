@@ -17,7 +17,6 @@ namespace Neggatrix.Components
                 var transform = Owner.GetComponent<Transform>();
                 if (transform == null) return RectangleF.Empty;
 
-                // Calculate top-left based on Position, Pivot, and Scale
                 float width = Size.Width * transform.Scale.X;
                 float height = Size.Height * transform.Scale.Y;
 

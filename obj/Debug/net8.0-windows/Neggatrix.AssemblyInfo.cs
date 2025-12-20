@@ -14,7 +14,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("Neggatrix")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+45d4e7f845f49f003dc9a95c84343b8758a86c00")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+886e4e9c38f8e8651803c2b8b9f9578dc843dbc2")]
 [assembly: System.Reflection.AssemblyProductAttribute("Neggatrix")]
 [assembly: System.Reflection.AssemblyTitleAttribute("Neggatrix")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]

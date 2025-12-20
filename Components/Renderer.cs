@@ -38,23 +38,17 @@ namespace Neggatrix.Components
         {
             if (_transform == null) return;
 
-            // 1. Save the current state of the graphics (to avoid affecting other objects)
             var state = g.Save();
 
-            // 2. Move the coordinate system to the GameObject's position
             g.TranslateTransform(_transform.Position.X, _transform.Position.Y);
 
-            // 3. Rotate the coordinate system
             g.RotateTransform(_transform.Rotation);
 
-            // 4. Calculate the Draw Area relative to (0,0)
-            // We only need to account for Pivot and Scale here
             SizeF finalSize = new SizeF(
                 Size.Width * _transform.Scale.X,
                 Size.Height * _transform.Scale.Y
             );
 
-            // This rectangle is centered (or pivoted) around (0,0)
             RectangleF relativeRect = new RectangleF(
                 -(_transform.Pivot.X * finalSize.Width),
                 -(_transform.Pivot.Y * finalSize.Height),
@@ -62,7 +56,6 @@ namespace Neggatrix.Components
                 finalSize.Height
             );
 
-            // 5. Draw
             if (BGColor.HasValue && BGColor.Value.A > 0)
             {
                 using (Brush bgBrush = new SolidBrush(BGColor.Value))
@@ -74,7 +67,6 @@ namespace Neggatrix.Components
                 g.DrawImage(Sprite, relativeRect);
             }
 
-            // 6. Restore the state for the next object
             g.Restore(state);
         }
         public void Update (float deltaTime) { }

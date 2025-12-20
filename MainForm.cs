@@ -18,7 +18,7 @@ namespace Neggatrix
         private double accumulator = 0;
         private readonly float targetDeltaTime = 1f / 60f;
 
-        private Game game;
+        private Game? game;
         private Stopwatch stopwatch;
         public double lastTime = 0.0f;
 
@@ -32,29 +32,12 @@ namespace Neggatrix
             stopwatch.Start();
             Start();
         }
-        Transform transform;
-        PhysicsBody physics;
+        PhysicsBody? physics;
         public void Start()
         {
             // Game
             game = new Game();
 
-            // Player
-            /*GameObject square = new GameObject();
-
-            transform = square.AddComponent<Transform>();
-            transform.Position = new PointF(150, 100);
-            transform.Rotation = 0;
-
-            var renderer = square.AddComponent<Renderer>();
-            renderer.BGColor = Color.Red;
-            renderer.Size = new SizeF(50, 50);
-
-            var collider = square.AddComponent<BoxCollider>();
-            collider.Size = renderer.Size;
-
-            physics = square.AddComponent<PhysicsBody>();
-            physics.Friction = 0.8f;*/
             Player player = new Player();
             physics = player.GetComponent<PhysicsBody>();
             game.AddObject(player);
@@ -97,23 +80,23 @@ namespace Neggatrix
 
                 while (accumulator >= targetDeltaTime)
                 {
-                    if (Input.IsPressed(Keys.W))
+                    if (physics != null)
                     {
-                        physics.AddForce(new PointF(0, -1000));
+                        if (Input.IsPressed(Keys.W))
+                        {
+                            physics.AddForce(new PointF(0, -1000));
+                        }
+                        if (Input.IsDown(Keys.A))
+                        {
+                            physics.AddForce(new PointF(-100, 0));
+                        }
+                        if (Input.IsDown(Keys.D))
+                        {
+                            physics.AddForce(new PointF(100, 0));
+                        }
                     }
-                    if (Input.IsDown(Keys.A))
-                    {
-                        physics.AddForce(new PointF(-100, 0));
-                    }
-                    if (Input.IsDown(Keys.D))
-                    {
-                        physics.AddForce(new PointF(100, 0));
-                    }
 
-
-
-
-                    game.Update(targetDeltaTime);
+                    if (game != null) game.Update(targetDeltaTime);
                     accumulator -= targetDeltaTime;
 
                     Invalidate();
@@ -126,7 +109,7 @@ namespace Neggatrix
         protected override void OnPaint(PaintEventArgs e)
         {
             base.OnPaint(e);
-            game.Render(e.Graphics);
+            if (game != null) game.Render(e.Graphics, ClientSize.Width, ClientSize.Height);
         }
 
         private void MainForm_KeyDown(object sender, KeyEventArgs e)

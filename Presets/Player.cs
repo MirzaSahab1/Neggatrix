@@ -26,6 +26,8 @@ namespace Neggatrix.Presets
             boxCollider.Size = renderer.Size;
 
             var physicsBody = AddComponent<PhysicsBody>();
+
+            var camera = AddComponent<Camera>();
         }
 
         public void TakeDamage(float amount)

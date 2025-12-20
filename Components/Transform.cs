@@ -37,7 +37,6 @@ namespace Neggatrix.Components
             Position = position;
         }
 
-
         public void Start() { }
         public void Update(float deltaTime) { }
         public void Destroy() { }

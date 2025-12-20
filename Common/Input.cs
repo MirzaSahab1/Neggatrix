@@ -15,7 +15,7 @@ namespace Neggatrix.Common
         {
             if (!down.Contains(k))
             {
-                pressed.Add(k); // edge
+                pressed.Add(k);
             }
             down.Add(k);
         }
