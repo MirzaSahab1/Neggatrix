@@ -35,3 +35,10 @@ D:\Neggatrix\Neggatrix\obj\Debug\net8.0-windows\Neggatrix.csproj.AssemblyReferen
 D:\Neggatrix\Neggatrix\obj\Debug\net8.0-windows\Neggatrix.sourcelink.json
 D:\Neggatrix\Neggatrix\obj\Debug\net8.0-windows\Neggatrix.csproj.Up2Date
 D:\Neggatrix\Neggatrix\bin\Debug\net8.0-windows\EZInput.dll
+D:\Neggatrix\Neggatrix\bin\Debug\net8.0-windows\NAudio.dll
+D:\Neggatrix\Neggatrix\bin\Debug\net8.0-windows\NAudio.Asio.dll
+D:\Neggatrix\Neggatrix\bin\Debug\net8.0-windows\NAudio.Core.dll
+D:\Neggatrix\Neggatrix\bin\Debug\net8.0-windows\NAudio.Midi.dll
+D:\Neggatrix\Neggatrix\bin\Debug\net8.0-windows\NAudio.Wasapi.dll
+D:\Neggatrix\Neggatrix\bin\Debug\net8.0-windows\NAudio.WinForms.dll
+D:\Neggatrix\Neggatrix\bin\Debug\net8.0-windows\NAudio.WinMM.dll

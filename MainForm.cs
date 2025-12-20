@@ -15,6 +15,7 @@ namespace Neggatrix
 {
     public partial class MainForm : Form
     {
+        private AudioManager audioManager;
         private double accumulator = 0;
         private readonly float targetDeltaTime = 1f / 60f;
 
@@ -36,6 +37,11 @@ namespace Neggatrix
         Player player;
         public void Start()
         {
+            audioManager = new AudioManager();
+            audioManager.MusicVolume = 0.01f;
+            audioManager.PlayMusic("D:\\Neggatrix\\Neggatrix\\Assets\\Audio\\BackgroundMusic.mp3");
+            
+
             // Game
             game = new Game();
 
@@ -86,6 +92,8 @@ namespace Neggatrix
                         if (Input.IsPressed(Keys.W))
                         {
                             physics.AddForce(new PointF(0, -1000));
+                            audioManager.SfxVolume = 1f;
+                            audioManager.PlaySound("D:\\Neggatrix\\Neggatrix\\Assets\\Audio\\Jump.mp3");
                         }
                         if (Input.IsDown(Keys.A))
                         {

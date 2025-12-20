@@ -58,6 +58,10 @@
               "target": "Package",
               "version": "[19.225.1, )"
             },
+            "NAudio": {
+              "target": "Package",
+              "version": "[2.2.1, )"
+            },
             "Topshelf": {
               "target": "Package",
               "version": "[4.3.0, )"
