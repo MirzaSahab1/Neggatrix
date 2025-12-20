@@ -10,6 +10,7 @@ using System.Diagnostics.CodeAnalysis;
 
 namespace Neggatrix.Components
 {
+    // Owner must have Transform component
     public class Renderer : IComponent, IRenderable
     {
         public required GameObject Owner { get; set; }

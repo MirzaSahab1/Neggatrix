@@ -7,6 +7,7 @@ using System.Threading.Tasks;
 
 namespace Neggatrix.Components
 {
+    // Owner must have Transform component
     public class BoxCollider : Collider
     {
         public SizeF Size { get; set; }

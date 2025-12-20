@@ -100,7 +100,8 @@ namespace Neggatrix
                             var camera = player.GetComponent<Camera>();
                             if (camera != null)
                             {
-                                camera.ShakeIntensity = 100;
+
+                                camera.ShakeIntensity = 10f;
                             }
                         }
                     }

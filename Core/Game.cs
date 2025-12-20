@@ -34,7 +34,9 @@ namespace Neggatrix.Core
                 //g.TranslateTransform(offset.X, offset.Y);
                 g.TranslateTransform(viewWidth / 2, viewHeight / 2);
                 g.ScaleTransform(camera.Zoom, camera.Zoom);
-                g.TranslateTransform(-camera.Position.X, -camera.Position.Y);
+
+
+                g.TranslateTransform(-camera.Position.X + camera.CurrentShake.X, -camera.Position.Y + camera.CurrentShake.Y);
             }
             foreach (var go in Objects)
             {

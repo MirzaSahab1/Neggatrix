@@ -10,6 +10,7 @@ using Neggatrix.Common;
 
 namespace Neggatrix.Components
 {
+    // Owner must have Transform and BoxCollider components
     public class PhysicsBody : IComponent
     {
         public required GameObject Owner { get; set; }

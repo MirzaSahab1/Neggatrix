@@ -11,6 +11,7 @@ namespace Neggatrix.Components
 {
     public class Camera : IComponent
     {
+        // Owner must have Transform component
         public required GameObject Owner { get; set; }
 
         public float Zoom { get; set; }
@@ -19,6 +20,10 @@ namespace Neggatrix.Components
 
         public PointF Position { get; private set; }
 
+        public PointF CurrentShake { get; private set; }
+
+        private Random _random;
+
         [SetsRequiredMembers]
         public Camera()
         {
@@ -26,18 +31,7 @@ namespace Neggatrix.Components
             Zoom = 1.0f;
             Smoothing = 5f;
             ShakeIntensity = 0.0f;
-        }
-
-        public PointF GetOffset(int screenWidth, int screenHeight)
-        {
-            var transform = Owner.GetComponent<Transform>();
-            if (transform == null)
-            {
-                return new PointF(0, 0);
-            }
-            float offsetX = screenWidth / 2f - transform.Position.X;
-            float offsetY = screenHeight / 2f - transform.Position.Y;
-            return new PointF(offsetX, offsetY);
+            _random = new Random();
         }
 
         public void Start() 
@@ -57,8 +51,16 @@ namespace Neggatrix.Components
             );
             if (ShakeIntensity > 0.0f)
             {
-                ShakeIntensity -= deltaTime * 10f;
-                if (ShakeIntensity < 0.0f) ShakeIntensity = 0.0f;
+                float offsetX = ((float)_random.NextDouble() * 2f - 1f) * ShakeIntensity;
+                float offsetY = ((float)_random.NextDouble() * 2f - 1f) * ShakeIntensity;
+                CurrentShake = new PointF(offsetX, offsetY);
+
+                ShakeIntensity = Math.Max(0.0f, ShakeIntensity - deltaTime * 5f);
+                if (ShakeIntensity < 0f) ShakeIntensity = 0f;
+            }
+            else
+            {
+                CurrentShake = new PointF(0f, 0f);
             }
 
         }
