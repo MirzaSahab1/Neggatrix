@@ -11,6 +11,12 @@ namespace Neggatrix.Core
     {
         public List<GameObject> Objects = new List<GameObject>();
 
+        public AudioManager Audio { get; private set; }
+
+        public Game()
+        {
+            Audio = new AudioManager();
+        }
         public void AddObject(GameObject obj)
         {
             obj.Scene = this;
@@ -29,9 +35,6 @@ namespace Neggatrix.Core
             var camera = cameraObj?.GetComponent<Camera>();
             if (camera != null)
             {
-                //PointF offset = camera.GetOffset(viewWidth, viewHeight);
-
-                //g.TranslateTransform(offset.X, offset.Y);
                 g.TranslateTransform(viewWidth / 2, viewHeight / 2);
                 g.ScaleTransform(camera.Zoom, camera.Zoom);
 

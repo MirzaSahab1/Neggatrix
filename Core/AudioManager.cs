@@ -24,6 +24,44 @@ public class AudioManager : IDisposable
         _outputDevice.Init(_mixer);
         _outputDevice.Play();
     }
+    public VolumeSampleProvider? PlaySpatialSound(string filePath, bool loop) // Not Working at the moment
+    {
+        try
+        {
+            var reader = new AudioFileReader(filePath);
+            ISampleProvider source = reader;
+
+            
+            if (reader.WaveFormat.Channels == 1 && _mixer.WaveFormat.Channels == 2)
+            {
+                source = new MonoToStereoSampleProvider(source);
+            }
+
+            if (loop)
+            {
+                var loopStream = new LoopStream(reader);
+                source = loopStream.ToSampleProvider();
+
+                
+                if (source.WaveFormat.Channels == 1 && _mixer.WaveFormat.Channels == 2)
+                {
+                    source = new MonoToStereoSampleProvider(source);
+                }
+            }
+
+            
+            var volumeProvider = new VolumeSampleProvider(source) { Volume = 1.0f };
+
+            _mixer.AddMixerInput(volumeProvider);
+
+            return volumeProvider;
+        }
+        catch (Exception ex)
+        {
+            System.Diagnostics.Debug.WriteLine($"[Audio Error] {ex.Message}");
+            return null;
+        }
+    }
 
     public void PlaySound(string filePath)
     {

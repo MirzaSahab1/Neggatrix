@@ -4,5 +4,11 @@
     <Compile Update="MainForm.cs">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Update="Scenes\GamePlay.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Update="Scenes\MainMenu.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
   </ItemGroup>
 </Project>

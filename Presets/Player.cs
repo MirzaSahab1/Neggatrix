@@ -16,7 +16,7 @@ namespace Neggatrix.Presets
         {
             Health = 100.0f;
             var transform = AddComponent<Transform>();
-            transform.Position = new PointF(150f, 100f);
+            transform.Position = new PointF(150f, 0f);
 
             var renderer = AddComponent<Renderer>();
             renderer.BGColor = Color.Red;

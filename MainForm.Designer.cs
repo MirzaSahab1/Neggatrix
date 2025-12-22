@@ -28,20 +28,33 @@
         /// </summary>
         private void InitializeComponent()
         {
+            panel1 = new Panel();
             SuspendLayout();
+            // 
+            // panel1
+            // 
+            panel1.Dock = DockStyle.Fill;
+            panel1.Location = new Point(0, 0);
+            panel1.Name = "panel1";
+            panel1.Size = new Size(1092, 713);
+            panel1.TabIndex = 0;
             // 
             // MainForm
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
-            ClientSize = new Size(800, 713);
+            ClientSize = new Size(1092, 713);
+            Controls.Add(panel1);
             Name = "MainForm";
             Text = "Game";
+            Load += MainForm_Load;
             KeyDown += MainForm_KeyDown;
             KeyUp += MainForm_KeyUp;
             ResumeLayout(false);
         }
 
         #endregion
+
+        private Panel panel1;
     }
 }
