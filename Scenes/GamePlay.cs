@@ -49,28 +49,21 @@ namespace Neggatrix.Scenes
             // Game
             game = new Game();
 
-            player = new Player();
+            // Player
+            player = new Player(new PointF(0, -200), Color.Black, new SizeF(50, 50));
             animator = player.AddComponent<Animator>();
             physics = player.GetComponent<PhysicsBody>();
 
-            game.AddObject(player);
-
             // Floor
-            GameObject floor = new GameObject();
-            var floorTransform = floor.AddComponent<Transform>();
-            floorTransform.Position = new PointF(0, Height);
-
-
-            var floorRenderer = floor.AddComponent<Renderer>();
-            floorRenderer.BGColor = Color.Black;
-            floorRenderer.Size = new SizeF(2000, 50);
-
-            var floorCollider = floor.AddComponent<BoxCollider>();
-            floorCollider.Size = floorRenderer.Size;
-
-            game.AddObject(floor);
-
+            Block Floor = new Block(new PointF(0,0), Color.Black, new SizeF(2000, 50));
+            
             // Wall
+            Block StartWall = new Block(new PointF(-1000, -225), Color.Black, new SizeF(50, 500));
+
+            // Adding GameObjects
+            game.AddObject(player);
+            game.AddObject(Floor);
+            game.AddObject(StartWall);
             
         }
         private void GameLoop(object? sender, EventArgs? e)

@@ -37,7 +37,7 @@ namespace Neggatrix
 
         private void MainForm_Load(object sender, EventArgs e)
         {
-            panel1.ShowView<MainMenu>();
+            panel1.ShowView<GamePlay>();
         }
     }
 }

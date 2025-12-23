@@ -3,25 +3,19 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using System.Drawing;
 using Neggatrix.Core;
 using Neggatrix.Components;
 
 namespace Neggatrix.Presets
 {
-    public class Player : GameObject
+    public class Block : GameObject
     {
-        public float Health { get; set; }
-
         public Transform transform;
         public Renderer renderer;
         public BoxCollider collider;
-        public PhysicsBody physicsBody;
-        public Camera camera;
 
-        public Player(PointF position, Color color, SizeF size)
+        public Block(PointF position, Color color, SizeF size)
         {
-            Health = 100.0f;
             transform = AddComponent<Transform>();
             transform.Position = position;
 
@@ -31,21 +25,6 @@ namespace Neggatrix.Presets
 
             collider = AddComponent<BoxCollider>();
             collider.Size = size;
-
-            physicsBody = AddComponent<PhysicsBody>();
-
-            camera = AddComponent<Camera>();
-        }
-
-        public void TakeDamage(float amount)
-        {
-            Health -= amount;
-            if (Health < 0) Health = 0;
-        }
-        public void PowerUp(float amount)
-        {
-            Health += amount;
-            if (Health > 100) Health = 100;
         }
     }
 }
