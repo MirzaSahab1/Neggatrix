@@ -38,6 +38,7 @@ namespace Neggatrix.Scenes
         }
         PhysicsBody? physics;
         Player player;
+        Animator animator;
         public void Start()
         {
             audioManager = new AudioManager();
@@ -49,7 +50,9 @@ namespace Neggatrix.Scenes
             game = new Game();
 
             player = new Player();
+            animator = player.AddComponent<Animator>();
             physics = player.GetComponent<PhysicsBody>();
+
             game.AddObject(player);
 
             // Floor
@@ -59,7 +62,7 @@ namespace Neggatrix.Scenes
 
 
             var floorRenderer = floor.AddComponent<Renderer>();
-            floorRenderer.BGColor = Color.Green;
+            floorRenderer.BGColor = Color.Black;
             floorRenderer.Size = new SizeF(2000, 50);
 
             var floorCollider = floor.AddComponent<BoxCollider>();
@@ -68,17 +71,7 @@ namespace Neggatrix.Scenes
             game.AddObject(floor);
 
             // Wall
-            GameObject wall = new GameObject();
-            var wallTransform = wall.AddComponent<Transform>();
-            wallTransform.Position = new PointF(Width, Height);
-            var wallRenderer = wall.AddComponent<Renderer>();
-            wallRenderer.BGColor = Color.Blue;
-            wallRenderer.Size = new SizeF(200, 200);
-            var wallCollider = wall.AddComponent<BoxCollider>();
-            wallCollider.Size = wallRenderer.Size;
-            var audioPlayer = wall.AddComponent<AudioPlayer>();
-            audioPlayer.filePath = "D:\\Neggatrix\\Neggatrix\\Assets\\Audio\\BackgroundMusic.mp3";
-            game.AddObject(wall);
+            
         }
         private void GameLoop(object? sender, EventArgs? e)
         {
@@ -97,6 +90,10 @@ namespace Neggatrix.Scenes
                         if (Input.IsPressed(Keys.W))
                         {
                             physics.AddForce(new PointF(0, -1000));
+                            player.transform.Rotation = 0;
+                            float final = 360;
+                            if (Input.IsDown(Keys.A)) final = -final;
+                            animator.AddTrack("Transform", "Rotation", final, 1f);
                             audioManager.SfxVolume = 1f;
                             audioManager.PlaySound("D:\\Neggatrix\\Neggatrix\\Assets\\Audio\\Jump.mp3");
                         }

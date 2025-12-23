@@ -34,6 +34,8 @@
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
+            BackgroundImage = Properties.Resources.Gemini_Generated_Image_ngstlgngstlgngst;
+            BackgroundImageLayout = ImageLayout.Stretch;
             Name = "GamePlay";
             Size = new Size(1056, 660);
             ResumeLayout(false);

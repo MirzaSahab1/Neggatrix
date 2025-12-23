@@ -35,6 +35,8 @@
             // 
             // mainLayout
             // 
+            mainLayout.BackgroundImage = Properties.Resources.MainMenuArt__1_;
+            mainLayout.BackgroundImageLayout = ImageLayout.Stretch;
             mainLayout.ColumnCount = 3;
             mainLayout.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 25F));
             mainLayout.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 50F));

@@ -31,6 +31,11 @@ namespace Neggatrix.Core
         {
             return _components.OfType<T>().FirstOrDefault();
         }
+
+        public IComponent GetComponentByName(string name)
+        {
+            return _components.FirstOrDefault(c => c.GetType().Name == name);
+        }
         public void Update(float deltaTime)
         {
             foreach (var component in _components)

@@ -12,14 +12,15 @@ namespace Neggatrix.Presets
     public class Player : GameObject
     {
         public float Health { get; set; }
+        public Transform transform;
         public Player()
         {
             Health = 100.0f;
-            var transform = AddComponent<Transform>();
+            transform = AddComponent<Transform>();
             transform.Position = new PointF(150f, 0f);
 
             var renderer = AddComponent<Renderer>();
-            renderer.BGColor = Color.Red;
+            renderer.BGColor = Color.Black;
             renderer.Size = new SizeF(50f, 50f);
 
             var boxCollider = AddComponent<BoxCollider>();
