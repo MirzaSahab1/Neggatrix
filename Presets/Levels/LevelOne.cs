@@ -7,7 +7,7 @@ using System.Numerics;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Neggatrix.Presets
+namespace Neggatrix.Presets.Levels
 {
     public class LevelOne : ILevel
     {

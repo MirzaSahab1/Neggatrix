@@ -2,6 +2,7 @@
 using Neggatrix.Components;
 using Neggatrix.Core;
 using Neggatrix.Presets;
+using Neggatrix.Presets.Levels;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -49,7 +50,7 @@ namespace Neggatrix.Scenes
             // Player
             player = new Player(new PointF(0, -200), Color.Black, new SizeF(50, 50));
 
-            game.Level.LoadLevel(new LevelOne());
+            game.Level.LoadLevel(new LevelFive());
 
             game.AddObject(player);
         }
