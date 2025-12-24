@@ -13,9 +13,12 @@ namespace Neggatrix.Core
 
         public AudioManager Audio { get; private set; }
 
+        public LevelManager Level { get; private set; }
+
         public Game()
         {
             Audio = new AudioManager();
+            Level = new LevelManager(this);
         }
         public void AddObject(GameObject obj)
         {
@@ -41,6 +44,8 @@ namespace Neggatrix.Core
 
                 g.TranslateTransform(-camera.Position.X + camera.CurrentShake.X, -camera.Position.Y + camera.CurrentShake.Y);
             }
+       
+
             foreach (var go in Objects)
             {
                 go.Render(g);

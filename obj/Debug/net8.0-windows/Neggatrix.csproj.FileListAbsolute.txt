@@ -42,6 +42,6 @@ D:\Neggatrix\Neggatrix\bin\Debug\net8.0-windows\NAudio.Midi.dll
 D:\Neggatrix\Neggatrix\bin\Debug\net8.0-windows\NAudio.Wasapi.dll
 D:\Neggatrix\Neggatrix\bin\Debug\net8.0-windows\NAudio.WinForms.dll
 D:\Neggatrix\Neggatrix\bin\Debug\net8.0-windows\NAudio.WinMM.dll
-D:\Neggatrix\Neggatrix\obj\Debug\net8.0-windows\Neggatrix.Scenes.GamePlay.resources
 D:\Neggatrix\Neggatrix\obj\Debug\net8.0-windows\Neggatrix.Scenes.MainMenu.resources
 D:\Neggatrix\Neggatrix\obj\Debug\net8.0-windows\Neggatrix.Properties.Resources.resources
+D:\Neggatrix\Neggatrix\obj\Debug\net8.0-windows\Neggatrix.Scenes.Level1.resources

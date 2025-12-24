@@ -24,7 +24,7 @@ namespace Neggatrix.Scenes
         {
             if (Parent is Panel panel)
             {
-                panel.ShowView<GamePlay>();
+                panel.ShowView<Level1>();
             }
         }
     }

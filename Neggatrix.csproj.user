@@ -4,7 +4,7 @@
     <Compile Update="MainForm.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Update="Scenes\GamePlay.cs">
+    <Compile Update="Scenes\Level1.cs">
       <SubType>UserControl</SubType>
     </Compile>
     <Compile Update="Scenes\MainMenu.cs">

@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 using System.Drawing;
 using Neggatrix.Core;
 using Neggatrix.Components;
+using Neggatrix.Interfaces;
 
 namespace Neggatrix.Presets
 {
@@ -17,7 +18,9 @@ namespace Neggatrix.Presets
         public Renderer renderer;
         public BoxCollider collider;
         public PhysicsBody physicsBody;
+        public Animator animator;
         public Camera camera;
+        public IMovement movement;
 
         public Player(PointF position, Color color, SizeF size)
         {
@@ -34,7 +37,11 @@ namespace Neggatrix.Presets
 
             physicsBody = AddComponent<PhysicsBody>();
 
+            animator = AddComponent<Animator>();
+
             camera = AddComponent<Camera>();
+
+            movement = AddComponent<KBPMovement>();
         }
 
         public void TakeDamage(float amount)

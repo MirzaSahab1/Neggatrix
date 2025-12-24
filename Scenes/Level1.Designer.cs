@@ -1,6 +1,6 @@
 ﻿namespace Neggatrix.Scenes
 {
-    partial class GamePlay
+    partial class Level1
     {
         /// <summary> 
         /// Required designer variable.
