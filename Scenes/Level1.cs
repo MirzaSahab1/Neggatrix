@@ -70,8 +70,7 @@ namespace Neggatrix.Scenes
 
                     if (Input.IsPressed(Keys.W))
                     {
-                        player.transform.Rotation = 0;
-                        player.animator.AddTrack("Transform", "Rotation", 360f, 1f);
+                        player.animator.AddTrack("Transform", "Rotation", 0f, 360f, 1f);
                     }
 
                     if (game != null) game.Update(targetDeltaTime);

@@ -29,25 +29,17 @@ namespace Neggatrix.Presets
             transform.Position = position;
 
             renderer = AddComponent<PolygonRenderer>();
-            renderer.FillColor = Color.Transparent;
-            renderer.OutlineColor = Color.Red;
+            renderer.FillColor = color;
             renderer.Vertices = new PointF[]
             {
-                new PointF(0, -50),    // Top Point
-                new PointF(11, -15),   // Inner Top-Right
-                new PointF(48, -15),   // Outer Right
-                new PointF(19, 7),     // Inner Bottom-Right
-                new PointF(29, 40),    // Outer Bottom-Right
-                new PointF(0, 20),     // Inner Bottom
-                new PointF(-29, 40),   // Outer Bottom-Left
-                new PointF(-19, 7),    // Inner Bottom-Left
-                new PointF(-48, -15),  // Outer Left
-                new PointF(-11, -15)   // Inner Top-Left
+                new PointF(-25, -25),
+                new PointF(25, -25),
+                new PointF(25, 25),
+                new PointF(-25, 25)
             };
-            renderer.CalculateBounds();
 
             collider = AddComponent<BoxCollider>();
-            collider.Size = renderer.Size;
+            collider.Size = size;
 
             physicsBody = AddComponent<PhysicsBody>();
 

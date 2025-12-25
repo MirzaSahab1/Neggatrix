@@ -12,8 +12,8 @@ namespace Neggatrix.Presets
     public class Enemy : GameObject
     {
         public Transform transform;
-        public Renderer renderer;
-        public BoxCollider collider;
+        public PolygonRenderer renderer;
+        public PolygonCollider collider;
         public IMovement movement;
 
         public Enemy(PointF position, Color color, SizeF size, IMovement movement)
@@ -21,12 +21,18 @@ namespace Neggatrix.Presets
             transform = AddComponent<Transform>();
             transform.Position = position;
 
-            renderer = AddComponent<Renderer>();
-            renderer.BGColor = color;
-            renderer.Size = size;
+            renderer = AddComponent<PolygonRenderer>();
+            renderer.FillColor = Color.FromArgb(50, 255, 0, 0);
+            renderer.Vertices = new PointF[]
+            {
+                new PointF(-10, 0),    // Top Left (Lens)
+                new PointF(10, 0),     // Top Right (Lens)
+                new PointF(150, 400),  // Bottom Right (Wide end)
+                new PointF(-150, 400)
+            };
 
-            collider = AddComponent<BoxCollider>();
-            collider.Size = size;
+            collider = AddComponent<PolygonCollider>();
+            collider.Vertices = renderer.Vertices;
 
             this.movement = movement;
         }

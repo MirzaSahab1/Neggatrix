@@ -17,13 +17,13 @@ namespace Neggatrix.Components
 
 
 
-        public void AddTrack(string componentName, string propertyName, object endValue, float duration)
+        public void AddTrack(string componentName, string propertyName, object startValue, object endValue, float duration)
         {
             var comp = Owner.GetComponentByName(componentName);
             
             PropertyInfo? prop = comp.GetType().GetProperty(propertyName);
 
-            object? startVal = prop.GetValue(comp);
+            object? startVal = startValue;
             if (startVal == null) return;
 
             _tracks.Add(new AnimationTrack
