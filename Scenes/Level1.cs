@@ -50,7 +50,7 @@ namespace Neggatrix.Scenes
             // Player
             player = new Player(new PointF(0, -200), Color.Black, new SizeF(50, 50));
 
-            game.Level.LoadLevel(new LevelFive());
+            game.Level.LoadLevel(new LevelOne());
 
             game.AddObject(player);
         }
@@ -67,6 +67,12 @@ namespace Neggatrix.Scenes
                 while (accumulator >= targetDeltaTime) // Runs Every Frame
                 {
                     player.movement.Move();
+
+                    if (Input.IsPressed(Keys.W))
+                    {
+                        player.transform.Rotation = 0;
+                        player.animator.AddTrack("Transform", "Rotation", 360f, 1f);
+                    }
 
                     if (game != null) game.Update(targetDeltaTime);
 

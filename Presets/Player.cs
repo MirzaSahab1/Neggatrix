@@ -15,7 +15,7 @@ namespace Neggatrix.Presets
         public float Health { get; set; }
 
         public Transform transform;
-        public Renderer renderer;
+        public PolygonRenderer renderer;
         public BoxCollider collider;
         public PhysicsBody physicsBody;
         public Animator animator;
@@ -28,12 +28,26 @@ namespace Neggatrix.Presets
             transform = AddComponent<Transform>();
             transform.Position = position;
 
-            renderer = AddComponent<Renderer>();
-            renderer.BGColor = color;
-            renderer.Size = size;
+            renderer = AddComponent<PolygonRenderer>();
+            renderer.FillColor = Color.Transparent;
+            renderer.OutlineColor = Color.Red;
+            renderer.Vertices = new PointF[]
+            {
+                new PointF(0, -50),    // Top Point
+                new PointF(11, -15),   // Inner Top-Right
+                new PointF(48, -15),   // Outer Right
+                new PointF(19, 7),     // Inner Bottom-Right
+                new PointF(29, 40),    // Outer Bottom-Right
+                new PointF(0, 20),     // Inner Bottom
+                new PointF(-29, 40),   // Outer Bottom-Left
+                new PointF(-19, 7),    // Inner Bottom-Left
+                new PointF(-48, -15),  // Outer Left
+                new PointF(-11, -15)   // Inner Top-Left
+            };
+            renderer.CalculateBounds();
 
             collider = AddComponent<BoxCollider>();
-            collider.Size = size;
+            collider.Size = renderer.Size;
 
             physicsBody = AddComponent<PhysicsBody>();
 
