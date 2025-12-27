@@ -28,7 +28,7 @@ namespace Neggatrix.Core
         }
         public void Update(float deltaTime)
         {
-            foreach (var go in Objects)
+            foreach (var go in Objects.ToList())
             {
                 go.Update(deltaTime);
             }
@@ -49,7 +49,6 @@ namespace Neggatrix.Core
 
             foreach (var go in Objects)
             {
-                // Inside Game.Render loop:
                 go.Render(g);
             }
             g.ResetTransform();

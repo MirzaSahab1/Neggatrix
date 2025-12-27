@@ -1,4 +1,5 @@
-﻿using Neggatrix.Components;
+﻿using Neggatrix.Common;
+using Neggatrix.Components;
 using Neggatrix.Core;
 using Neggatrix.Interfaces;
 using System;
@@ -18,23 +19,27 @@ namespace Neggatrix.Presets
         public PolygonRenderer coneRenderer;
         public PolygonCollider coneCollider;
         public Animator animator;
+        public PatrolMovement movement;
         public Script script;
 
+        public float Range { get; private set; }
+
         private GameObject? _cachedPlayer;
-        public Enemy(PointF startPos, IMovement movementLogic)
+        public Enemy(PointF startPos, Color color, float range, float speed, float height = 0)
         {
             Name = "Sentinel";
+            Range = range;
 
             transform = AddComponent<Transform>();
             transform.Position = startPos;
-            transform.Scale = new PointF(1.0f, 1.0f); 
+            transform.Scale = new PointF(1.0f, 1.0f);
 
             physicsBody = AddComponent<PhysicsBody>();
-            physicsBody.GravityScale = 0f; 
+            physicsBody.GravityScale = 0f;
             physicsBody.Friction = 0.9f;
 
             bodyRenderer = AddComponent<PolygonRenderer>();
-            bodyRenderer.FillColor = Color.FromArgb(50, 20, 25); 
+            bodyRenderer.FillColor = Color.Black;
             bodyRenderer.Vertices = new PointF[] {
                 new PointF(0, -40),   // Top Center
                 new PointF(30, -60),  // Right Horn Tip
@@ -45,19 +50,24 @@ namespace Neggatrix.Presets
                 new PointF(-20, -20), // Left Shoulder
                 new PointF(-30, -60)  // Left Horn Tip
             };
-          
+
             eyeRenderer = AddComponent<Renderer>();
-            eyeRenderer.BGColor = Color.FromArgb(200, 255, 0, 50); 
+            eyeRenderer.BGColor = Color.Red;
             eyeRenderer.Size = new SizeF(10, 10);
-            eyeRenderer.Offset = new PointF(0, -10); 
+            eyeRenderer.Offset = new PointF(0, -10);
+
+            if (height == 0) height = (float)Utils.Distance(transform.Position, new PointF(startPos.X, 0)) - 25;
+            float radAngle = (30 / 2) * (MathF.PI / 180);
+            float b = (float)(2 * height * MathF.Tan(radAngle));
+            float r = b / 2;
 
             coneRenderer = AddComponent<PolygonRenderer>();
-            coneRenderer.FillColor = Color.FromArgb(100, 255, 0, 50); 
+            coneRenderer.FillColor = color;
             coneRenderer.Vertices = new PointF[] {
                 new PointF(5, -5),
                 new PointF(-5, -5),// Tip
-                new PointF(-200, 400),  // Base Right
-                new PointF(200, 400)  // Base Left
+                new PointF(-b, height),  // Base Right
+                new PointF(b, height)  // Base Left
             };
 
             coneCollider = AddComponent<PolygonCollider>();
@@ -66,9 +76,15 @@ namespace Neggatrix.Presets
 
             animator = AddComponent<Animator>();
 
+            movement = AddComponent<PatrolMovement>();
+            movement.StartPoint = transform.Position.X;
+            movement.EndPoint = transform.Position.X + Range;
+            movement.Speed = speed;
+
             script = AddComponent<Script>();
             script.OnUpdate = (deltaTime) =>
             {
+                movement.Move();
                 if (_cachedPlayer == null)
                 {
                     _cachedPlayer = Scene.Objects.FirstOrDefault(o => o.Name == "Player");
@@ -80,7 +96,7 @@ namespace Neggatrix.Presets
                 if (playerCol == null) return;
 
                 
-                if (!coneCollider.Bounds.IntersectsWith(playerCol.Bounds)) return;
+                //if (!coneCollider.Bounds.IntersectsWith(playerCol.Bounds)) return;
 
                 RectangleF pBounds = playerCol.Bounds;
 
@@ -105,9 +121,7 @@ namespace Neggatrix.Presets
                
                 if (spotted)
                 {
-                    var myRenderer = GetComponent<PolygonRenderer>(); 
-                    myRenderer.FillColor = Color.FromArgb(128, 0, 255, 0);               
-                    Console.WriteLine("PLAYER DETECTED!");
+                    Console.WriteLine("sd");
                 }
             };
         }

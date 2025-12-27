@@ -39,8 +39,6 @@ namespace Neggatrix.Scenes
 
         // Variables Related to the Game
         private Game? game;
-        Player? player;
-        Enemy? enemy;
         public void Start() // Runs Once At the Start
         {
             // Game
@@ -48,15 +46,12 @@ namespace Neggatrix.Scenes
             game.Audio.MusicVolume = 0.01f; 
 
             // Player
-            player = new Player(new PointF(0, -200), Color.Black, new SizeF(50, 50));
+            Player player = new Player(new PointF(0, -200), Color.Black, new SizeF(50, 50));
             player.Name = "Player";
-
-            enemy = new Enemy(new PointF(300, -300), new PatrolMovement());
 
             game.Level.LoadLevel(new LevelOne());
 
             game.AddObject(player);
-            game.AddObject(enemy);
         }
         private void GameLoop(object? sender, EventArgs? e)
         {
@@ -70,22 +65,6 @@ namespace Neggatrix.Scenes
 
                 while (accumulator >= targetDeltaTime) // Runs Every Frame
                 {
-                    /*player.movement.Move();
-                    foreach (var hitObject in player.physicsBody.ActiveCollisions)
-                    {
-                        if (hitObject.Name == "LevelExit")
-                        {
-                            player.transform.Position = new PointF(0, -200);
-                            player.camera.Start();
-                            game.Level.LoadLevel(new LevelTwo());
-                            
-                        }
-                    }
-                    if (Input.IsDown(Keys.W) && player.physicsBody.IsGrounded)
-                    {
-                        player.animator.AddTrack("Transform", "Rotation", 0f, 360f, 1f, true, () => !player.physicsBody.IsGrounded);
-                    }*/
-
                     if (game != null) game.Update(targetDeltaTime);
 
                     accumulator -= targetDeltaTime;

@@ -18,6 +18,8 @@ namespace Neggatrix.Components
         public PointF[] Vertices { get; set; } 
 
         public SizeF Size { get; private set; }
+
+        public bool DrawCollider { get; set; }
         
         public PolygonRenderer()
         {
@@ -26,6 +28,7 @@ namespace Neggatrix.Components
             OutlineColor = Color.Transparent;
             OutlineThickness = 1f;
             Vertices = new PointF[0];
+            DrawCollider = false;
         }
         public void Start()
         {
@@ -65,10 +68,8 @@ namespace Neggatrix.Components
                 g.FillPolygon(brush, Vertices);
             }
             var col = Owner.GetComponent<PolygonCollider>();
-            if (col != null)
+            if (col != null && DrawCollider)
             {
-                // FIX: Draw 'Vertices' (Local), NOT 'WorldVertices'
-                // The Graphics object handles the rotation/position for you here.
                 g.DrawPolygon(Pens.Yellow, col.Vertices);
             }
             if (OutlineColor != Color.Transparent)

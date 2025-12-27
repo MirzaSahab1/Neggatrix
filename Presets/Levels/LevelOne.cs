@@ -30,7 +30,9 @@ namespace Neggatrix.Presets.Levels
             game.AddObject(new Block(new PointF(700, -500), Color.Black, new SizeF(150, 50)));
             game.AddObject(new Block(new PointF(1000, -650), Color.Black, new SizeF(150, 50)));
 
-            //game.AddObject(new Enemy(new PointF(600, -300), new PatrolMovement()));
+            game.AddObject(new Enemy(new PointF(550, -400), Color.FromArgb(50, 255, 0, 0), 400f, 100f));
+            game.AddObject(new Enemy(new PointF(1500, -400), Color.FromArgb(50, 255, 0, 0), 400f, 150f));
+            game.AddObject(new Enemy(new PointF(2500, -400), Color.FromArgb(50, 255, 0, 0), 400f, 200f));
 
             // --- The High Peak (A wide rest area) ---
             game.AddObject(new Block(new PointF(1500, -800), Color.Black, new SizeF(400, 50)));
@@ -45,8 +47,9 @@ namespace Neggatrix.Presets.Levels
 
             game.AddObject(new Block(new PointF(4000, -50), Color.Black, new SizeF(50, 50)));
             // --- The Tunnel Entrance (Large blocks creating a roof) ---
-            game.AddObject(new Block(new PointF(4500, -150), Color.Black, new SizeF(800, 320))); // A thick wall/ceiling
-                                                                                                 // Cluster 1: The Ascent
+            game.AddObject(new Block(new PointF(4500, -150), Color.Black, new SizeF(800, 320)));
+
+            game.AddObject(new Enemy(new PointF(5200, -500), Color.FromArgb(50, 0, 0, 255), 800f, 200f));
 
             game.AddObject(new Block(new PointF(4600, -520), Color.Black, new SizeF(150, 50)));
 
