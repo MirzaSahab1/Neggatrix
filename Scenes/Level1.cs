@@ -39,7 +39,7 @@ namespace Neggatrix.Scenes
 
         // Variables Related to the Game
         private Game? game;
-        Player player;
+        Player? player;
 
         public void Start() // Runs Once At the Start
         {
@@ -67,10 +67,19 @@ namespace Neggatrix.Scenes
                 while (accumulator >= targetDeltaTime) // Runs Every Frame
                 {
                     player.movement.Move();
-
-                    if (Input.IsPressed(Keys.W))
+                    foreach (var hitObject in player.physicsBody.ActiveCollisions)
                     {
-                        player.animator.AddTrack("Transform", "Rotation", 0f, 360f, 1f);
+                        if (hitObject.Name == "LevelExit")
+                        {
+                            player.transform.Position = new PointF(0, -200);
+                            player.camera.Start();
+                            game.Level.LoadLevel(new LevelTwo());
+                            
+                        }
+                    }
+                    if (Input.IsDown(Keys.W) && player.physicsBody.IsGrounded)
+                    {
+                        player.animator.AddTrack("Transform", "Rotation", 0f, 360f, 1f, true, () => !player.physicsBody.IsGrounded);
                     }
 
                     if (game != null) game.Update(targetDeltaTime);

@@ -14,10 +14,7 @@ namespace Neggatrix.Components
         public GameObject Owner { get; set; } = null!;
         private readonly List<AnimationTrack> _tracks = new List<AnimationTrack>();
 
-
-
-
-        public void AddTrack(string componentName, string propertyName, object startValue, object endValue, float duration)
+        public void AddTrack(string componentName, string propertyName, object startValue, object endValue, float duration, bool loop = false, Func<bool>? loopCondition = null)
         {
             var comp = Owner.GetComponentByName(componentName);
             
@@ -33,7 +30,9 @@ namespace Neggatrix.Components
                 StartValue = startVal,
                 EndValue = endValue,
                 Duration = duration,
-                Elapsed = 0
+                Elapsed = 0,
+                Loop = loop,
+                LoopCondition = loopCondition
             });
         }
 
@@ -47,6 +46,28 @@ namespace Neggatrix.Components
                 track.Elapsed += deltaTime;
 
                 float t = Math.Clamp(track.Elapsed / track.Duration, 0, 1);
+                if (track.Loop && track.LoopCondition != null)
+                {
+                    if (track.LoopCondition() == false)
+                    {
+                        track.Loop = false;
+                    }
+                }
+                if (track.Loop)
+                {
+                    // If we passed the duration, wrap around
+                    if (t >= 1.0f)
+                    {
+                        // Reset timer (subtract duration to keep movement smooth despite frame drops)
+                        track.Elapsed -= track.Duration;
+                        t = 0.0f; // Snap back to start
+                    }
+                }
+                else
+                {
+                    // Clamp strictly to 1.0 if not looping so we don't overshoot
+                    t = Math.Clamp(t, 0, 1);
+                }
 
                 ApplyLerp(track, t);
 

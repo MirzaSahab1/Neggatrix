@@ -16,6 +16,8 @@ namespace Neggatrix.Core
         public object? EndValue { get; set; }
         public float Duration { get; set; }
         public float Elapsed { get; set; }
+        public bool Loop { get; set; }
+        public Func<bool>? LoopCondition { get; set; }
         public bool IsFinished => Elapsed >= Duration;
     }
 }

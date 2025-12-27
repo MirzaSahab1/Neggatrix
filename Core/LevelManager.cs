@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Neggatrix.Presets;
 
 namespace Neggatrix.Core
 {
@@ -18,7 +19,7 @@ namespace Neggatrix.Core
 
         public void LoadLevel(ILevel level)
         {
-            _game.Objects.Clear();
+            _game.Objects.RemoveAll(obj => !(obj is Player));
 
             level.Build(_game);
         }

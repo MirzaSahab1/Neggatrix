@@ -68,6 +68,11 @@ namespace Neggatrix.Presets.Levels
             game.AddObject(new Block(new PointF(8250, -850), Color.Black, new SizeF(100, 20)));
             // The Massive Wall (Must climb to -1200 to pass)
             game.AddObject(new Block(new PointF(8500, -500), Color.Black, new SizeF(200, 1000)));
+            Block exit = new Block(new PointF(8500, -1100), Color.Black, new SizeF(180, 180));
+            exit.Name = "LevelExit";
+            exit.collider.IsTrigger = true;
+            exit.renderer.BGColor = Color.FromArgb(50, 0, 255, 0);
+            game.AddObject(exit);
         }
     }
 }

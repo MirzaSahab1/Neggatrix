@@ -10,6 +10,7 @@ namespace Neggatrix.Core
     public class GameObject
     {
         public Game? Scene { get; set; }
+        public string Name { get; set; } = "GameObject";
         private List<IComponent> _components = new List<IComponent>();
 
         

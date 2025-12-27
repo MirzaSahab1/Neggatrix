@@ -12,11 +12,23 @@ namespace Neggatrix.Common
         public static int gameWindowWidth = 1000;
         public static int gameWindowHeight = 600;
         public static float GlobalGravity = 2000f;
+        public static string Font = "Curlz MT";
 
         public static float Distance(PointF a, PointF b)
         {
             return (float)Math.Sqrt(Math.Pow(a.X - b.X, 2) + Math.Pow(a.Y - b.Y, 2));
         }
+
+        public static int CalculateFPS(float deltaTime)
+        {
+            if (deltaTime <= 0) return 0;
+            return (int)(1f / deltaTime);
+        }
+        public static int KFontSize(float k, int width, int height)
+        {
+            return (int)(Math.Sqrt(width * height) * k);
+        }
+
         public static void ShowView<T>(this Panel container) where T : UserControl, new()
         {
             container.Controls.Clear();

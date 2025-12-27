@@ -33,18 +33,23 @@
             // 
             // panel1
             // 
+            panel1.BackColor = Color.Transparent;
             panel1.Dock = DockStyle.Fill;
             panel1.Location = new Point(0, 0);
             panel1.Name = "panel1";
-            panel1.Size = new Size(1092, 713);
+            panel1.Size = new Size(1092, 668);
             panel1.TabIndex = 0;
             // 
             // MainForm
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
-            ClientSize = new Size(1092, 713);
+            BackColor = Color.DarkSlateGray;
+            BackgroundImage = Properties.Resources.MainMenuArt__1_;
+            BackgroundImageLayout = ImageLayout.Stretch;
+            ClientSize = new Size(1092, 668);
             Controls.Add(panel1);
+            DoubleBuffered = true;
             Name = "MainForm";
             Text = "Game";
             Load += MainForm_Load;

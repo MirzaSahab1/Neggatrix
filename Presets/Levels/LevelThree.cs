@@ -14,7 +14,7 @@ namespace Neggatrix.Presets.Levels
         public void Build(Game game)
         {
             Color shadow = Color.Black;
-            Color junkColor = Color.FromArgb(15, 15, 15); // Slightly lighter for visual clutter
+            Color junkColor = Color.FromArgb(128, 15, 15, 15); // Slightly lighter for visual clutter
 
             // --- THE BROKEN FLOOR (With Holes) ---
             // Instead of one block, we create segments. If there is a gap in X, it's a hole.

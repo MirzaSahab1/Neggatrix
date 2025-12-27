@@ -6,6 +6,7 @@ using Neggatrix.Presets;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Numerics;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -20,6 +21,7 @@ namespace Neggatrix.Components
 
         public KBPMovement() 
         {
+            Owner = null!;
             MoveForce = 50f;
             JumpForce = 1000f;
         }
@@ -32,9 +34,10 @@ namespace Neggatrix.Components
             var physics = Owner.GetComponent<PhysicsBody>();
             var camera = Owner.GetComponent<Camera>();
 
-            if (Input.IsPressed(Keys.W))
+            if (Input.IsPressed(Keys.W) )
             {
                 physics.AddForce(new PointF(0, -JumpForce));
+
             }
             if (Input.IsDown(Keys.A))
             {

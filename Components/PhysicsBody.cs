@@ -15,6 +15,10 @@ namespace Neggatrix.Components
     {
         public required GameObject Owner { get; set; }
 
+        public HashSet<GameObject> ActiveCollisions { get; private set; } 
+
+        public bool IsGrounded { get; private set; }
+
         public PointF Velocity { get; set; }
         public float Mass { get; set; }
         public float Friction { get; set; }
@@ -24,10 +28,12 @@ namespace Neggatrix.Components
         public PhysicsBody()
         {
             Owner = null!;
+            ActiveCollisions = new HashSet<GameObject>();
             Velocity = new PointF(0.0f, 0.0f);
             Mass = 1.0f;
             Friction = 0.9f;
             GravityScale = 1.0f;
+            IsGrounded = false;
         }
 
         public void AddForce(PointF force)
@@ -46,6 +52,8 @@ namespace Neggatrix.Components
             var transform = Owner.GetComponent<Transform>();
             var myCollider = Owner.GetComponent<BoxCollider>();
             if (transform == null || myCollider == null) return;
+            IsGrounded = false;
+            ActiveCollisions.Clear();
 
             // Apply gravity
             float gravityForce = Utils.GlobalGravity * GravityScale * Mass;
@@ -70,49 +78,54 @@ namespace Neggatrix.Components
                 var otherCollider = otherGO.GetComponent<BoxCollider>();
                 if (otherCollider != null)
                 {
-                    if (myCollider.Bounds.IntersectsWith(otherCollider.Bounds) && !otherCollider.IsTrigger)
+                    if (myCollider.Bounds.IntersectsWith(otherCollider.Bounds))
                     {
-                        RectangleF myBounds = myCollider.Bounds;
-                        RectangleF otherBounds = otherCollider.Bounds;
-
-                        RectangleF intersection = RectangleF.Intersect(myBounds, otherBounds);
-
-                        if (intersection.Width < intersection.Height)
+                        ActiveCollisions.Add(otherGO);
+                        if (!otherCollider.IsTrigger)
                         {
-                            Velocity = new PointF(0, Velocity.Y);
+                            RectangleF myBounds = myCollider.Bounds;
+                            RectangleF otherBounds = otherCollider.Bounds;
 
-                            if (myBounds.Left < otherBounds.Left) 
-                            {
-                                transform.Position = new PointF(
-                                    otherBounds.Left - (myBounds.Width * (1 - transform.Pivot.X)),
-                                    transform.Position.Y
-                                );
-                            }
-                            else 
-                            {
-                                transform.Position = new PointF(
-                                    otherBounds.Right + (myBounds.Width * transform.Pivot.X),
-                                    transform.Position.Y
-                                );
-                            }
-                        }
-                        else 
-                        {
-                            Velocity = new PointF(Velocity.X, 0);
+                            RectangleF intersection = RectangleF.Intersect(myBounds, otherBounds);
 
-                            if (myBounds.Top < otherBounds.Top) 
+                            if (intersection.Width < intersection.Height)
                             {
-                                transform.Position = new PointF(
-                                    transform.Position.X,
-                                    otherBounds.Top - (myBounds.Height * (1 - transform.Pivot.Y))
-                                );
+                                Velocity = new PointF(0, Velocity.Y);
+
+                                if (myBounds.Left < otherBounds.Left)
+                                {
+                                    transform.Position = new PointF(
+                                        otherBounds.Left - (myBounds.Width * (1 - transform.Pivot.X)),
+                                        transform.Position.Y
+                                    );
+                                }
+                                else
+                                {
+                                    transform.Position = new PointF(
+                                        otherBounds.Right + (myBounds.Width * transform.Pivot.X),
+                                        transform.Position.Y
+                                    );
+                                }
                             }
-                            else 
+                            else
                             {
-                                transform.Position = new PointF(
-                                    transform.Position.X,
-                                    otherBounds.Bottom + (myBounds.Height * transform.Pivot.Y)
-                                );
+                                Velocity = new PointF(Velocity.X, 0);
+
+                                if (myBounds.Top < otherBounds.Top)
+                                {
+                                    transform.Position = new PointF(
+                                        transform.Position.X,
+                                        otherBounds.Top - (myBounds.Height * (1 - transform.Pivot.Y))
+                                    );
+                                    IsGrounded = true;
+                                }
+                                else
+                                {
+                                    transform.Position = new PointF(
+                                        transform.Position.X,
+                                        otherBounds.Bottom + (myBounds.Height * transform.Pivot.Y)
+                                    );
+                                }
                             }
                         }
                     }

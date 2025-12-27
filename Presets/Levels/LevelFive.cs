@@ -14,8 +14,10 @@ namespace Neggatrix.Presets.Levels
         public void Build(Game game)
         {
             Color shadow = Color.Black;
-            Color veinColor = Color.FromArgb(5, 5, 5); // Almost pure black, just for texture
+            Color veinColor = Color.FromArgb(128, 5, 5, 5); // Almost pure black, just for texture
             Random rng = new Random(123);
+
+            game.AddObject(new Block(new PointF(0, -190), shadow, new SizeF(500, 50))); // Starting Platform
 
             // --- THE "VEINS" (Background Clutter) ---
             // Creating massive, sweeping arcs that cross the entire 15,000 units
@@ -42,27 +44,52 @@ namespace Neggatrix.Presets.Levels
             }
 
             // --- SECTION 2: THE INK RAIN (X: 5500 - 9000) ---
-            // Hundreds of tiny, thin vertical blocks to simulate frozen rain
-            for (int i = 0; i < 300; i++)
+
+            // Part A: The Visual Rain (Non-Collidable Background)
+            for (int i = 0; i < 400; i++) // Increased density for better look
             {
                 float x = 5500 + rng.Next(0, 3500);
                 float y = -rng.Next(0, 1500);
                 y = (float)(Math.Round(y / 50.0) * 50);
 
-                var rain = new Block(new PointF(x, y), shadow, new SizeF(10, rng.Next(50, 200)));
+                // Make them thin and vary the alpha slightly if your Color supports it
+                var rain = new Block(new PointF(x, y), Color.FromArgb(128, 255, 0, 0), new SizeF(10, rng.Next(50, 250)));
 
-                // Only make some collidable to make it a "leap of faith" section
-                if (rng.NextDouble() > 0.7)
-                {
-                    // Collidable path
-                }
-                else
-                {
-                    rain.RemoveComponent(rain.GetComponent<BoxCollider>());
-                    rain.GetComponent<Renderer>().BGColor = veinColor;
-                }
+                // Ensure these are ghost objects
+                var col = rain.GetComponent<BoxCollider>();
+                if (col != null) rain.RemoveComponent(col);
+
                 game.AddObject(rain);
             }
+
+            // Part B: The Coagulated Path (Playable Platforms)
+            // We generate a wandering path that cuts through the rain
+            float pathY = -450; // Starting height matches end of Section 1
+            for (float x = 5600; x < 9000; x += rng.Next(250, 400))
+            {
+                // 1. Move the path up or down randomly
+                pathY += rng.Next(-250, 200);
+
+                // 2. Keep it within playable bounds (don't go too high or fall into abyss)
+                pathY = Math.Clamp(pathY, -1200, -200);
+
+                // 3. Snap to your 50-unit grid
+                float gridY = (float)(Math.Round(pathY / 50.0) * 50);
+
+                // 4. Create the Platform (Solid Shadow Color)
+                // We make these slightly wider (120) so they are easy to spot in the clutter
+                game.AddObject(new Block(new PointF(x, gridY), shadow, new SizeF(120, 50)));
+
+                // Optional: Add a small "drip" below the platform to blend it with the theme
+                // This is visual only
+                var drip = new Block(new PointF(x + 40, gridY + 50), veinColor, new SizeF(20, 100));
+                var col = drip.GetComponent<BoxCollider>();
+                if (col != null) drip.RemoveComponent(col);
+                game.AddObject(drip);
+            }
+
+            game.AddObject(new Block(new PointF(9500, -450), shadow, new SizeF(200, 50)));
+            game.AddObject(new Block(new PointF(9800, -620), shadow, new SizeF(200, 50)));
 
             // --- SECTION 3: THE HEART OF THE VOID (X: 10000 - 13000) ---
             // A massive, solid block structure with holes carved out in a "Voronoi" pattern

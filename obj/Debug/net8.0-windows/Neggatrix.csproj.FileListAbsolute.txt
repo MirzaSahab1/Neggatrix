@@ -45,3 +45,8 @@ D:\Neggatrix\Neggatrix\bin\Debug\net8.0-windows\NAudio.WinMM.dll
 D:\Neggatrix\Neggatrix\obj\Debug\net8.0-windows\Neggatrix.Scenes.MainMenu.resources
 D:\Neggatrix\Neggatrix\obj\Debug\net8.0-windows\Neggatrix.Properties.Resources.resources
 D:\Neggatrix\Neggatrix\obj\Debug\net8.0-windows\Neggatrix.Scenes.Level1.resources
+D:\Neggatrix\Neggatrix\obj\Debug\net8.0-windows\Neggatrix.Scenes.Credits.resources
+D:\Neggatrix\Neggatrix\obj\Debug\net8.0-windows\Neggatrix.Scenes.LevelsScreen.resources
+D:\Neggatrix\Neggatrix\obj\Debug\net8.0-windows\Neggatrix.Scenes.LoseScreen.resources
+D:\Neggatrix\Neggatrix\obj\Debug\net8.0-windows\Neggatrix.Scenes.Settings.resources
+D:\Neggatrix\Neggatrix\obj\Debug\net8.0-windows\Neggatrix.Scenes.WinScreen.resources

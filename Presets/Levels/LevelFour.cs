@@ -1,4 +1,5 @@
-﻿using Neggatrix.Components;
+﻿using Neggatrix.Common;
+using Neggatrix.Components;
 using Neggatrix.Core;
 using Neggatrix.Interfaces;
 using System;
@@ -14,7 +15,7 @@ namespace Neggatrix.Presets.Levels
         public void Build(Game game)
         {
             Color shadow = Color.Black;
-            Color structureColor = Color.FromArgb(10, 10, 10); // Very dark gray for background structures
+            Color structureColor = Color.FromArgb(128, 10, 10, 10); // Very dark gray for background structures
             Random rng = new Random(777);
 
             // --- THE VOID (No Floor) ---
@@ -22,7 +23,8 @@ namespace Neggatrix.Presets.Levels
             // If the player falls, they die. We only provide floating "islands".
 
             // --- THE STARTING PEDESTAL ---
-            game.AddObject(new Block(new PointF(-200, 0), shadow, new SizeF(600, 50)));
+            game.AddObject(new Block(new PointF(-200, -200), shadow, new SizeF(600, 50)));
+            game.AddObject(new Block(new PointF(-50, -400), shadow, new SizeF(200, 50)));
 
             // --- SECTION 1: THE HELIX PATH (X: 500 - 5000) ---
             // Two paths crossing each other vertically like a DNA strand.
@@ -40,7 +42,7 @@ namespace Neggatrix.Presets.Levels
                 game.AddObject(new Block(new PointF(x, y2), shadow, new SizeF(100, 50)));
 
                 // Artistic "Connectors" (Visual Only - no colliders)
-                var beam = new Block(new PointF(x + 40, Math.Min(y1, y2)), structureColor, new SizeF(20, Math.Abs(y1 - y2)));
+                var beam = new Block(new PointF(x + 40, (Utils.Distance(new PointF(0, y1), new PointF(0, y2)) / Math.Max(y1, y2)) - 375), structureColor, new SizeF(20, Math.Abs(y1 - y2)));
                 var col = beam.GetComponent<BoxCollider>();
                 if (col != null) beam.RemoveComponent(col);
                 game.AddObject(beam);
@@ -58,9 +60,9 @@ namespace Neggatrix.Presets.Levels
 
                 // The challenging jumps attached to the ribs
                 game.AddObject(new Block(new PointF(x - 50, -300), shadow, new SizeF(200, 50)));
-                game.AddObject(new Block(new PointF(x + 150, -600), shadow, new SizeF(50, 50))); // Precision landing
+                game.AddObject(new Block(new PointF(x + 150, -500), shadow, new SizeF(50, 50))); // Precision landing
             }
-
+            game.AddObject(new Block(new PointF(10100, -650), shadow, new SizeF(50, 50)));
             // --- SECTION 3: THE BROKEN CATHEDRAL (X: 10500 - 14000) ---
             // Floating "chandeliers" and thin vertical towers
             for (int x = 10500; x < 14000; x += 600)
@@ -80,6 +82,15 @@ namespace Neggatrix.Presets.Levels
 
             // Final Exit Pillar (Multiple of 50 height)
             game.AddObject(new Block(new PointF(14900, -1000), shadow, new SizeF(100, 2000)));
+            
+            game.AddObject(new Block(new PointF(14500, -640), Color.Black, new SizeF(100, 20)));
+            game.AddObject(new Block(new PointF(14650, -850), Color.Black, new SizeF(100, 20)));
+            game.AddObject(new Block(new PointF(14500, -1060), Color.Black, new SizeF(100, 20)));
+            game.AddObject(new Block(new PointF(14650, -1270), Color.Black, new SizeF(100, 20)));
+            game.AddObject(new Block(new PointF(14500, -1510), Color.Black, new SizeF(100, 20)));
+            game.AddObject(new Block(new PointF(14650, -1750), Color.Black, new SizeF(100, 20)));
+            game.AddObject(new Block(new PointF(14500, -1990), Color.Black, new SizeF(100, 20)));
+            game.AddObject(new Block(new PointF(14650, -2220), Color.Black, new SizeF(100, 20)));
         }
     }
 }
