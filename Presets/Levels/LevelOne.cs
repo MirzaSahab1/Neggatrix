@@ -30,7 +30,7 @@ namespace Neggatrix.Presets.Levels
             game.AddObject(new Block(new PointF(700, -500), Color.Black, new SizeF(150, 50)));
             game.AddObject(new Block(new PointF(1000, -650), Color.Black, new SizeF(150, 50)));
 
-            game.AddObject(new Enemy(new PointF(600, -300), Color.Red, new SizeF(50, 50), new PatrolMovement()));
+            //game.AddObject(new Enemy(new PointF(600, -300), new PatrolMovement()));
 
             // --- The High Peak (A wide rest area) ---
             game.AddObject(new Block(new PointF(1500, -800), Color.Black, new SizeF(400, 50)));

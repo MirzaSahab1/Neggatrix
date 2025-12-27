@@ -19,6 +19,7 @@ namespace Neggatrix.Components
         public Color? BGColor { get; set; }
 
         public SizeF Size { get; set; }
+        public PointF Offset { get; set; }
 
         private Transform? _transform;
 
@@ -28,6 +29,7 @@ namespace Neggatrix.Components
             Owner = null!;
             BGColor = Color.Transparent;
             Size = new SizeF(64f, 64f);
+            Offset = new PointF(0, 0);
         }
 
         public void Start () 
@@ -35,21 +37,32 @@ namespace Neggatrix.Components
             _transform = Owner.GetComponent<Transform>();
         }
 
-        public void Render (Graphics g)
+        public void Render(Graphics g)
         {
             if (_transform == null) return;
 
             var state = g.Save();
 
+            // 1. Move to World Position
             g.TranslateTransform(_transform.Position.X, _transform.Position.Y);
 
+            // 2. Rotate
             g.RotateTransform(_transform.Rotation);
 
+            // 3. Apply Local Offset (NEW CODE)
+            // We multiply by Scale so the offset grows if the object grows
+            g.TranslateTransform(
+                Offset.X * _transform.Scale.X,
+                Offset.Y * _transform.Scale.Y
+            );
+
+            // 4. Calculate Size
             SizeF finalSize = new SizeF(
                 Size.Width * _transform.Scale.X,
                 Size.Height * _transform.Scale.Y
             );
 
+            // 5. Calculate Draw Rect (Relative to the new Offset center)
             RectangleF relativeRect = new RectangleF(
                 -(_transform.Pivot.X * finalSize.Width),
                 -(_transform.Pivot.Y * finalSize.Height),
@@ -57,6 +70,7 @@ namespace Neggatrix.Components
                 finalSize.Height
             );
 
+            // 6. Draw
             if (BGColor.HasValue && BGColor.Value.A > 0)
             {
                 using (Brush bgBrush = new SolidBrush(BGColor.Value))

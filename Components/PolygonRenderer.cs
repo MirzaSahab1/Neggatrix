@@ -64,7 +64,13 @@ namespace Neggatrix.Components
             {
                 g.FillPolygon(brush, Vertices);
             }
-
+            var col = Owner.GetComponent<PolygonCollider>();
+            if (col != null)
+            {
+                // FIX: Draw 'Vertices' (Local), NOT 'WorldVertices'
+                // The Graphics object handles the rotation/position for you here.
+                g.DrawPolygon(Pens.Yellow, col.Vertices);
+            }
             if (OutlineColor != Color.Transparent)
             {
                 using (Pen pen = new Pen(OutlineColor, OutlineThickness))

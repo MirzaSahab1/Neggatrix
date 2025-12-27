@@ -40,7 +40,7 @@ namespace Neggatrix.Scenes
         // Variables Related to the Game
         private Game? game;
         Player? player;
-
+        Enemy? enemy;
         public void Start() // Runs Once At the Start
         {
             // Game
@@ -50,9 +50,12 @@ namespace Neggatrix.Scenes
             // Player
             player = new Player(new PointF(0, -200), Color.Black, new SizeF(50, 50));
 
+            enemy = new Enemy(new PointF(300, -300), new PatrolMovement());
+
             game.Level.LoadLevel(new LevelOne());
 
             game.AddObject(player);
+            game.AddObject(enemy);
         }
         private void GameLoop(object? sender, EventArgs? e)
         {
