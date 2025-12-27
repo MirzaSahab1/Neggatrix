@@ -1,12 +1,15 @@
-﻿using System;
+﻿using Neggatrix.Common;
+using Neggatrix.Components;
+using Neggatrix.Core;
+using Neggatrix.Interfaces;
+using Neggatrix.Presets.Levels;
+using System;
 using System.Collections.Generic;
+using System.Drawing;
 using System.Linq;
+using System.Numerics;
 using System.Text;
 using System.Threading.Tasks;
-using System.Drawing;
-using Neggatrix.Core;
-using Neggatrix.Components;
-using Neggatrix.Interfaces;
 
 namespace Neggatrix.Presets
 {
@@ -21,6 +24,7 @@ namespace Neggatrix.Presets
         public Animator animator;
         public Camera camera;
         public IMovement movement;
+        public Script script;
 
         public Player(PointF position, Color color, SizeF size)
         {
@@ -48,6 +52,27 @@ namespace Neggatrix.Presets
             camera = AddComponent<Camera>();
 
             movement = AddComponent<KBPMovement>();
+
+            script = AddComponent<Script>();
+            script.OnUpdate = (deltaTime) =>
+            {
+                movement.Move();
+
+                foreach (var hitObject in physicsBody.ActiveCollisions)
+                {
+                    if (hitObject.Name == "LevelExit")
+                    {
+                        transform.Position = new PointF(0, -200);
+                        camera.Start();
+                        Scene.Level.LoadLevel(new LevelTwo());
+                    }
+                }
+
+                if (Input.IsDown(Keys.W) && physicsBody.IsGrounded)
+                {
+                    animator.AddTrack("Transform", "Rotation", 0f, 360f, 1f, true, () => !physicsBody.IsGrounded);
+                }
+            };
         }
 
         public void TakeDamage(float amount)

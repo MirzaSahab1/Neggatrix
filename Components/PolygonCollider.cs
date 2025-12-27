@@ -14,15 +14,10 @@ namespace Neggatrix.Components
     {
         public GameObject Owner { get; set; } = null!;
 
-        // 1. The Local Shape (Defined around 0,0)
-        // Keep this simple (e.g., a 100x100 square)
         public PointF[] Vertices { get; set; } = new PointF[0];
 
-        // 2. Trigger Flag (For Coins, Portals, etc.)
         public bool IsTrigger { get; set; } = false;
 
-        // 3. Dynamic Property: Calculates where the vertices actually ARE on screen
-        // This applies Position + Rotation + Scale
         public PointF[] WorldVertices
         {
             get
@@ -39,22 +34,21 @@ namespace Neggatrix.Components
 
                 for (int i = 0; i < Vertices.Length; i++)
                 {
-                    // A. Apply Scale
+                    // Scale
                     float sx = Vertices[i].X * t.Scale.X;
                     float sy = Vertices[i].Y * t.Scale.Y;
 
-                    // B. Apply Rotation
+                    // Rotation
                     float rx = sx * cos - sy * sin;
                     float ry = sx * sin + sy * cos;
 
-                    // C. Apply Translation (Position)
+                    // Translation (Position)
                     worldVerts[i] = new PointF(rx + t.Position.X, ry + t.Position.Y);
                 }
                 return worldVerts;
             }
         }
 
-        // 4. Bounds (Required for PhysicsBody Broad Phase)
         // Calculates a flat box around the rotated polygon
         public RectangleF Bounds
         {
@@ -77,9 +71,6 @@ namespace Neggatrix.Components
                 return new RectangleF(minX, minY, maxX - minX, maxY - minY);
             }
         }
-
-        // 5. The Actual "Is Point Inside" Check (Ray Casting Algorithm)
-        // Now we check against WorldVertices, so it matches what you see on screen.
         public bool IsPointInside(PointF worldPoint)
         {
             var verts = WorldVertices;
@@ -88,7 +79,7 @@ namespace Neggatrix.Components
 
             for (int i = 0; i < verts.Length; i++)
             {
-                // This is the "Ray Casting" math
+                // Ray Casting
                 if ((verts[i].Y > worldPoint.Y) != (verts[j].Y > worldPoint.Y) &&
                      worldPoint.X < (verts[j].X - verts[i].X) * (worldPoint.Y - verts[i].Y) / (verts[j].Y - verts[i].Y) + verts[i].X)
                 {

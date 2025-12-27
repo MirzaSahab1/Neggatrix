@@ -49,6 +49,7 @@ namespace Neggatrix.Scenes
 
             // Player
             player = new Player(new PointF(0, -200), Color.Black, new SizeF(50, 50));
+            player.Name = "Player";
 
             enemy = new Enemy(new PointF(300, -300), new PatrolMovement());
 
@@ -69,7 +70,7 @@ namespace Neggatrix.Scenes
 
                 while (accumulator >= targetDeltaTime) // Runs Every Frame
                 {
-                    player.movement.Move();
+                    /*player.movement.Move();
                     foreach (var hitObject in player.physicsBody.ActiveCollisions)
                     {
                         if (hitObject.Name == "LevelExit")
@@ -83,7 +84,7 @@ namespace Neggatrix.Scenes
                     if (Input.IsDown(Keys.W) && player.physicsBody.IsGrounded)
                     {
                         player.animator.AddTrack("Transform", "Rotation", 0f, 360f, 1f, true, () => !player.physicsBody.IsGrounded);
-                    }
+                    }*/
 
                     if (game != null) game.Update(targetDeltaTime);
 
