@@ -21,6 +21,8 @@ namespace Neggatrix.Presets.Levels
 
             Block Plt1 = new Block(new PointF(100, -200), Color.Black, new SizeF(200, 50));
 
+            game.AddObject(new Orb(new PointF(-945, -55), Color.Red, new Size(50, 50)));
+
             // Adding GameObjects
             game.AddObject(Floor);
             game.AddObject(StartWall);

@@ -73,6 +73,16 @@ namespace Neggatrix.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
+        internal static System.Drawing.Bitmap blueOrb {
+            get {
+                object obj = ResourceManager.GetObject("blueOrb", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
         internal static System.Drawing.Bitmap Gemini_Generated_Image_ngstlgngstlgngst {
             get {
                 object obj = ResourceManager.GetObject("Gemini_Generated_Image_ngstlgngstlgngst", resourceCulture);
@@ -83,9 +93,29 @@ namespace Neggatrix.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
+        internal static System.Drawing.Bitmap greenOrb {
+            get {
+                object obj = ResourceManager.GetObject("greenOrb", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
         internal static System.Drawing.Bitmap MainMenuArt__1_ {
             get {
                 object obj = ResourceManager.GetObject("MainMenuArt (1)", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap redOrb {
+            get {
+                object obj = ResourceManager.GetObject("redOrb", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
