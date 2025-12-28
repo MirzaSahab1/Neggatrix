@@ -22,6 +22,7 @@ namespace Neggatrix.Presets.Levels
             Block Plt1 = new Block(new PointF(100, -200), Color.Black, new SizeF(200, 50));
 
             game.AddObject(new Orb(new PointF(-945, -55), Color.Red, new Size(50, 50)));
+            game.AddObject(new ScorePoint(new PointF(-500, -100), Color.Black, 10));
 
             // Adding GameObjects
             game.AddObject(Floor);
@@ -32,9 +33,9 @@ namespace Neggatrix.Presets.Levels
             game.AddObject(new Block(new PointF(700, -500), Color.Black, new SizeF(150, 50)));
             game.AddObject(new Block(new PointF(1000, -650), Color.Black, new SizeF(150, 50)));
 
-            game.AddObject(new Enemy(new PointF(550, -400), Color.FromArgb(50, 255, 0, 0), 400f, 100f));
-            game.AddObject(new Enemy(new PointF(1500, -400), Color.FromArgb(50, 255, 0, 0), 400f, 150f));
-            game.AddObject(new Enemy(new PointF(2500, -400), Color.FromArgb(50, 255, 0, 0), 400f, 200f));
+            game.AddObject(new Enemy(new PointF(550, -400), Color.Red, 400f, 100f));
+            game.AddObject(new Enemy(new PointF(1500, -400), Color.Red, 400f, 150f));
+            game.AddObject(new Enemy(new PointF(2500, -400), Color.Red, 400f, 200f));
 
             // --- The High Peak (A wide rest area) ---
             game.AddObject(new Block(new PointF(1500, -800), Color.Black, new SizeF(400, 50)));
@@ -51,7 +52,7 @@ namespace Neggatrix.Presets.Levels
             // --- The Tunnel Entrance (Large blocks creating a roof) ---
             game.AddObject(new Block(new PointF(4500, -150), Color.Black, new SizeF(800, 320)));
 
-            game.AddObject(new Enemy(new PointF(5200, -500), Color.FromArgb(50, 0, 0, 255), 800f, 200f));
+            game.AddObject(new Enemy(new PointF(5200, -500), Color.Blue, 800f, 200f));
 
             game.AddObject(new Block(new PointF(4600, -520), Color.Black, new SizeF(150, 50)));
 

@@ -51,11 +51,12 @@ namespace Neggatrix.Presets
             animator = AddComponent<Animator>();
 
             camera = AddComponent<Camera>();
+            camera.Zoom = 0.5f;
 
             movement = AddComponent<KBPMovement>();
 
             timer = AddComponent<Time>();
-            timer.Duration = 5f;
+            timer.Duration = 10f;
 
             script = AddComponent<Script>();
             script.OnUpdate = (deltaTime) =>
@@ -68,25 +69,29 @@ namespace Neggatrix.Presets
                     {
                         transform.Position = new PointF(0, -200);
                         camera.Start();
-                        Scene.Level.LoadLevel(new LevelTwo());
+                        Scene?.Level.LoadLevel(new LevelTwo());
                     }
                     if (hitObject.Name == "RedOrb")
                     {
                         renderer.FillColor = Color.Red;
                         timer.Play();
-                        Scene.Objects.Remove(hitObject);
+                        Scene?.Objects.Remove(hitObject);
                     }
                     else if (hitObject.Name == "BlueOrb")
                     {
                         renderer.FillColor = Color.Blue;
+                        timer.Play();
+                        Scene?.Objects.Remove(hitObject);
                     }
                     else if (hitObject.Name == "GreenOrb")
                     {
                         renderer.FillColor = Color.Green;
+                        timer.Play();
+                        Scene?.Objects.Remove(hitObject);
                     }
                 }
 
-                if (timer.IsFinished && renderer.FillColor != Color.Black) { renderer.FillColor = Color.Black; timer.Stop(); }
+                if (timer.IsFinished) { renderer.FillColor = Color.Black; timer.Stop(); }
 
                 if (Input.IsDown(Keys.W) && physicsBody.IsGrounded)
                 {

@@ -16,7 +16,8 @@ namespace Neggatrix.Components
         public required GameObject Owner { get; set; }
 
         public Image? Sprite { get; set; }
-        public Color? BGColor { get; set; }
+        public Color BGColor { get; set; }
+
 
         public SizeF Size { get; set; }
         public PointF Offset { get; set; }
@@ -71,9 +72,9 @@ namespace Neggatrix.Components
             );
 
             // 6. Draw
-            if (BGColor.HasValue && BGColor.Value.A > 0)
+            if (BGColor != Color.Transparent)
             {
-                using (Brush bgBrush = new SolidBrush(BGColor.Value))
+                using (Brush bgBrush = new SolidBrush(BGColor))
                     g.FillRectangle(bgBrush, relativeRect);
             }
 

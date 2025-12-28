@@ -25,7 +25,7 @@ namespace Neggatrix.Presets
         public float Range { get; private set; }
 
         private GameObject? _cachedPlayer;
-        public Enemy(PointF startPos, Color color, float range, float speed, float height = 0)
+        public Enemy(PointF startPos, Color eyecolor, float range, float speed, float height = 0)
         {
             Name = "Sentinel";
             Range = range;
@@ -52,7 +52,7 @@ namespace Neggatrix.Presets
             };
 
             eyeRenderer = AddComponent<Renderer>();
-            eyeRenderer.BGColor = Color.Red;
+            eyeRenderer.BGColor = eyecolor;
             eyeRenderer.Size = new SizeF(10, 10);
             eyeRenderer.Offset = new PointF(0, -10);
 
@@ -62,7 +62,7 @@ namespace Neggatrix.Presets
             float r = b / 2;
 
             coneRenderer = AddComponent<PolygonRenderer>();
-            coneRenderer.FillColor = color;
+            coneRenderer.FillColor = Color.FromArgb(128, eyecolor);
             coneRenderer.Vertices = new PointF[] {
                 new PointF(5, -5),
                 new PointF(-5, -5),// Tip
@@ -85,18 +85,16 @@ namespace Neggatrix.Presets
             script.OnUpdate = (deltaTime) =>
             {
                 movement.Move();
-                if (_cachedPlayer == null)
-                {
-                    _cachedPlayer = Scene.Objects.FirstOrDefault(o => o.Name == "Player");
-                    if (_cachedPlayer == null) return;
-                }
+                Player player = (Player)Scene.Objects.FirstOrDefault(o => o is Player);
+                    
+                
 
                
-                var playerCol = _cachedPlayer.GetComponent<BoxCollider>();
+                var playerCol = player.GetComponent<BoxCollider>();
                 if (playerCol == null) return;
 
                 
-                //if (!coneCollider.Bounds.IntersectsWith(playerCol.Bounds)) return;
+                if (!coneCollider.Bounds.IntersectsWith(playerCol.Bounds)) return;
 
                 RectangleF pBounds = playerCol.Bounds;
 
@@ -119,7 +117,7 @@ namespace Neggatrix.Presets
                 }
 
                
-                if (spotted)
+                if (spotted && player.renderer.FillColor.ToArgb() != eyeRenderer.BGColor.ToArgb())
                 {
                     Console.WriteLine("sd");
                 }
