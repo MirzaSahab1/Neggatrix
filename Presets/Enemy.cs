@@ -7,6 +7,8 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Neggatrix.Scenes;
+using MessageBox = Neggatrix.Scenes.MessageBox;
 
 namespace Neggatrix.Presets
 {
@@ -22,6 +24,7 @@ namespace Neggatrix.Presets
         public PatrolMovement movement;
         public Script script;
 
+        private MessageBox mb { get; set; }
         public float Range { get; private set; }
 
         private GameObject? _cachedPlayer;
@@ -29,6 +32,8 @@ namespace Neggatrix.Presets
         {
             Name = "Sentinel";
             Range = range;
+            mb = new MessageBox("You got Deleted!", "Restart");
+            mb.exitButton.Click += mb.exitButton_Click;
 
             transform = AddComponent<Transform>();
             transform.Position = startPos;
@@ -85,11 +90,8 @@ namespace Neggatrix.Presets
             script.OnUpdate = (deltaTime) =>
             {
                 movement.Move();
-                Player player = (Player)Scene.Objects.FirstOrDefault(o => o is Player);
+                Player player = (Player)Game.Objects.FirstOrDefault(o => o is Player);
                     
-                
-
-               
                 var playerCol = player.GetComponent<BoxCollider>();
                 if (playerCol == null) return;
 
@@ -117,9 +119,13 @@ namespace Neggatrix.Presets
                 }
 
                
-                if (spotted && player.renderer.FillColor.ToArgb() != eyeRenderer.BGColor.ToArgb())
+                if (spotted && player.renderer.FillColor.ToArgb() != eyeRenderer.BGColor.ToArgb() && !Game.IsPaused)
                 {
-                    Console.WriteLine("sd");
+
+                    // mb.Location = new Point(Game.gamePlayForm.Width / 4, Game.gamePlayForm.Height / 4);
+                    //Game.gamePlayForm.Controls.Add(mb);
+                    //Game.IsStopped = true;
+                    Game.Restart();
                 }
             };
         }

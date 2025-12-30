@@ -71,7 +71,7 @@ namespace Neggatrix.Components
             Velocity = new PointF(Velocity.X * frictionFactor, Velocity.Y );
 
             // Process Collisions, Unoptimized at the moment
-            foreach (var otherGO in Owner.Scene.Objects)
+            foreach (var otherGO in Owner.Game.Objects)
             {
                 if (otherGO == Owner) continue;
 

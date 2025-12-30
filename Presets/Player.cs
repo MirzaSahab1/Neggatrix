@@ -16,6 +16,7 @@ namespace Neggatrix.Presets
     public class Player : GameObject
     {
         public float Health { get; set; }
+        public int Score { get; private set; }
 
         public Transform transform;
         public PolygonRenderer renderer;
@@ -30,6 +31,7 @@ namespace Neggatrix.Presets
         public Player(PointF position, Color color, SizeF size)
         {
             Health = 100.0f;
+            Score = 0;
             transform = AddComponent<Transform>();
             transform.Position = position;
 
@@ -69,25 +71,32 @@ namespace Neggatrix.Presets
                     {
                         transform.Position = new PointF(0, -200);
                         camera.Start();
-                        Scene?.Level.LoadLevel(new LevelTwo());
+                        Game?.Level.LoadLevel(new LevelTwo());
                     }
                     if (hitObject.Name == "RedOrb")
                     {
                         renderer.FillColor = Color.Red;
                         timer.Play();
-                        Scene?.Objects.Remove(hitObject);
+                        Game?.Objects.Remove(hitObject);
                     }
                     else if (hitObject.Name == "BlueOrb")
                     {
                         renderer.FillColor = Color.Blue;
                         timer.Play();
-                        Scene?.Objects.Remove(hitObject);
+                        Game?.Objects.Remove(hitObject);
                     }
                     else if (hitObject.Name == "GreenOrb")
                     {
                         renderer.FillColor = Color.Green;
                         timer.Play();
-                        Scene?.Objects.Remove(hitObject);
+                        Game?.Objects.Remove(hitObject);
+                    }
+                    else if (hitObject.Name == "ScorePoint")
+                    {
+                        ScorePoint point = (ScorePoint)hitObject;
+                        Score += point.Score;
+                        Game?.Objects.Remove(hitObject);
+                        Game.gamePlayForm.score.Text += point.Score;
                     }
                 }
 
@@ -100,10 +109,6 @@ namespace Neggatrix.Presets
             };
         }
 
-        public void ChangeColor(Color color)
-        {
-
-        }
         public void TakeDamage(float amount)
         {
             Health -= amount;

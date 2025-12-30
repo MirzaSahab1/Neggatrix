@@ -36,9 +36,9 @@ namespace Neggatrix.Components
         {
             // 1. LINK TO THE ENGINE
             // Your Game class assigns 'Scene' to the GameObject, so we use that path.
-            if (Owner.Scene != null)
+            if (Owner.Game != null)
             {
-                _audioManager = Owner.Scene.Audio;
+                _audioManager = Owner.Game.Audio;
             }
 
             // 2. PLAY THE SOUND
@@ -58,7 +58,7 @@ namespace Neggatrix.Components
             if (_listenerTransform == null)
             {
                 // Accessing Scene directly through Owner
-                var listenerObj = Owner.Scene?.Objects.FirstOrDefault(g => g.GetComponent<Camera>() != null);
+                var listenerObj = Owner.Game?.Objects.FirstOrDefault(g => g.GetComponent<Camera>() != null);
                 if (listenerObj != null)
                 {
                     _listenerTransform = listenerObj.GetComponent<Transform>();

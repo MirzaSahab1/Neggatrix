@@ -11,20 +11,24 @@ using System.Windows.Forms;
 
 namespace Neggatrix.Scenes
 {
-    public partial class Settings : UserControl
+    public partial class Story : UserControl
     {
-        public Settings()
+        public Story()
         {
             InitializeComponent();
-            Width = Utils.gameWindowWidth;
-            Height = Utils.gameWindowHeight;
+            DoubleBuffered = true;
+            this.Width = Utils.gameWindowWidth;
+            this.Height = Utils.gameWindowHeight;
             mainLayout.ForeColor = Color.White;
             titleLabel.Font = new Font(Utils.Font, Utils.KFontSize(0.08f, Width, Height));
+            mainLayout.Font = new Font(Utils.Font, Utils.KFontSize(0.04f, Width, Height));
             backButton.Font = new Font(Utils.Font, Utils.KFontSize(0.08f, Width, Height));
-            MVLabel.Font = new Font(Utils.Font, Utils.KFontSize(0.04f, Width, Height));
-            SFXVLabel.Font = new Font(Utils.Font, Utils.KFontSize(0.04f, Width, Height));
             backButton.Cursor = Cursors.Hand;
             StyleUtils.ApplyHoverEffect(backButton);
+            storyTextBox.Text = Utils.storyContent;
+            storyTextBox.ForeColor = Color.White;
+            storyTextBox.Font = new Font(Utils.Font, Utils.KFontSize(0.03f, Width, Height));
+            this.Focus();
         }
 
         private void backButton_Click(object sender, EventArgs e)
@@ -35,15 +39,20 @@ namespace Neggatrix.Scenes
             }
         }
 
+        private void titleLabel_Resize(object sender, EventArgs e)
+        {
+
+        }
+
         private void mainLayout_Resize(object sender, EventArgs e)
         {
             if (Parent?.TopLevelControl is Form mainForm)
             {
                 if (mainForm.WindowState == FormWindowState.Minimized) return;
                 titleLabel.Font = new Font(Utils.Font, Utils.KFontSize(0.08f, Width, Height));
+                mainLayout.Font = new Font(Utils.Font, Utils.KFontSize(0.04f, Width, Height));
                 backButton.Font = new Font(Utils.Font, Utils.KFontSize(0.08f, Width, Height));
-                MVLabel.Font = new Font(Utils.Font, Utils.KFontSize(0.04f, Width, Height));
-                SFXVLabel.Font = new Font(Utils.Font, Utils.KFontSize(0.04f, Width, Height));
+                storyTextBox.Font = new Font(Utils.Font, Utils.KFontSize(0.03f, Width, Height));
             }
         }
     }

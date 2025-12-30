@@ -7,22 +7,25 @@
     <Compile Update="Scenes\Credits.cs">
       <SubType>UserControl</SubType>
     </Compile>
-    <Compile Update="Scenes\Level1.cs">
+    <Compile Update="Scenes\GamePlay.cs">
       <SubType>UserControl</SubType>
     </Compile>
     <Compile Update="Scenes\LevelsScreen.cs">
       <SubType>UserControl</SubType>
     </Compile>
-    <Compile Update="Scenes\LoseScreen.cs">
+    <Compile Update="Scenes\MainMenu.cs">
       <SubType>UserControl</SubType>
     </Compile>
-    <Compile Update="Scenes\MainMenu.cs">
+    <Compile Update="Scenes\MessageBox.cs">
       <SubType>UserControl</SubType>
     </Compile>
     <Compile Update="Scenes\Settings.cs">
       <SubType>UserControl</SubType>
     </Compile>
-    <Compile Update="Scenes\WinScreen.cs">
+    <Compile Update="Scenes\Story.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Update="Scenes\Tutorial.cs">
       <SubType>UserControl</SubType>
     </Compile>
   </ItemGroup>

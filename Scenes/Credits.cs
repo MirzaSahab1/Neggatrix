@@ -30,9 +30,13 @@ namespace Neggatrix.Scenes
 
         private void mainLayout_Resize(object sender, EventArgs e)
         {
-            titleLabel.Font = new Font(Utils.Font, Utils.KFontSize(0.08f, Width, Height));
-            mainLayout.Font = new Font(Utils.Font, Utils.KFontSize(0.04f, Width, Height));
-            backButton.Font = new Font(Utils.Font, Utils.KFontSize(0.08f, Width, Height));
+            if (Parent?.TopLevelControl is Form mainForm)
+            {
+                if (mainForm.WindowState == FormWindowState.Minimized) return;
+                titleLabel.Font = new Font(Utils.Font, Utils.KFontSize(0.08f, Width, Height));
+                mainLayout.Font = new Font(Utils.Font, Utils.KFontSize(0.04f, Width, Height));
+                backButton.Font = new Font(Utils.Font, Utils.KFontSize(0.08f, Width, Height));
+            }
         }
 
         private void backButton_Click(object sender, EventArgs e)

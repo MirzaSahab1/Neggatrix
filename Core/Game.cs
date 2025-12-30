@@ -1,37 +1,104 @@
-﻿using Neggatrix.Components;
+﻿using Neggatrix.Common;
+using Neggatrix.Components;
+using Neggatrix.Interfaces;
+using Neggatrix.Presets;
+using Neggatrix.Presets.Levels;
+using Neggatrix.Scenes;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Security.Cryptography.Xml;
+using System.Security.Policy;
 using System.Text;
 using System.Threading.Tasks;
+using MessageBox = Neggatrix.Scenes.MessageBox;
 
 namespace Neggatrix.Core
 {
     public class Game
     {
         public List<GameObject> Objects = new List<GameObject>();
+        public GamePlay gamePlayForm { get; set; }
+
+        public bool IsPaused { get; set; }
+        public bool IsStopped { get; set; }
 
         public AudioManager Audio { get; private set; }
 
         public LevelManager Level { get; private set; }
 
-        public Game()
+        private MessageBox mb;
+
+        public Game(GamePlay gamePlay)
         {
+            IsPaused = false;
+            IsStopped = false;
             Audio = new AudioManager();
             Level = new LevelManager(this);
+            gamePlayForm = gamePlay;
+            mb = new MessageBox("Paused", "Resume");
+            
         }
         public void AddObject(GameObject obj)
         {
-            obj.Scene = this;
+            obj.Game = this;
             Objects.Add(obj);
         }
+
+        public void Start(string level)
+        {
+            Audio.MusicVolume = 0.01f;
+
+            // Player
+            Player player = new Player(new PointF(0, -200), Color.Black, new SizeF(50, 50));
+            player.Name = "Player";
+
+            ILevel startLevel;
+            if (level == "1") startLevel = new LevelOne();
+            else if (level == "2") startLevel = new LevelTwo();
+            else if (level == "3") startLevel = new LevelThree();
+            else if (level == "4") startLevel = new LevelFour();
+            else if (level == "5") startLevel = new LevelFive();
+            else startLevel = new LevelOne();
+
+            Level.LoadLevel(startLevel);
+
+            AddObject(player);
+        }
+
         public void Update(float deltaTime)
         {
+            if (Input.IsPressed(Keys.Escape))
+            {
+                IsPaused = !IsPaused;
+                mb.PauseStatus = true;
+            }
+            if (IsPaused)
+            {
+                IsPaused = mb.PauseStatus;
+                mb.Location = new Point(gamePlayForm.Width / 4, gamePlayForm.Height / 4);
+                gamePlayForm.Controls.Add(mb);
+            }
+            if (!IsPaused)
+            {
+                gamePlayForm.Controls.Remove(mb);
+                gamePlayForm.Focus();
+            }
             foreach (var go in Objects.ToList())
             {
-                go.Update(deltaTime);
+                go.Update(IsPaused || IsStopped ? 0 : deltaTime);
             }
+        }
+        public void Restart()
+        {
+            Objects.Clear();
+            IsPaused = false;
+            IsStopped = false;
+            Audio = new AudioManager();
+
+            Level = new LevelManager(this);
+            mb = new MessageBox("Paused", "Resume");
+            Start("1");
         }
         public void Render(Graphics g, int viewWidth, int viewHeight)
         {

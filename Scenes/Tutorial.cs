@@ -11,20 +11,24 @@ using System.Windows.Forms;
 
 namespace Neggatrix.Scenes
 {
-    public partial class Settings : UserControl
+    public partial class Tutorial : UserControl
     {
-        public Settings()
+        public Tutorial()
         {
             InitializeComponent();
-            Width = Utils.gameWindowWidth;
-            Height = Utils.gameWindowHeight;
+            DoubleBuffered = true;
+            this.Width = Utils.gameWindowWidth;
+            this.Height = Utils.gameWindowHeight;
             mainLayout.ForeColor = Color.White;
             titleLabel.Font = new Font(Utils.Font, Utils.KFontSize(0.08f, Width, Height));
+            mainLayout.Font = new Font(Utils.Font, Utils.KFontSize(0.04f, Width, Height));
             backButton.Font = new Font(Utils.Font, Utils.KFontSize(0.08f, Width, Height));
-            MVLabel.Font = new Font(Utils.Font, Utils.KFontSize(0.04f, Width, Height));
-            SFXVLabel.Font = new Font(Utils.Font, Utils.KFontSize(0.04f, Width, Height));
             backButton.Cursor = Cursors.Hand;
             StyleUtils.ApplyHoverEffect(backButton);
+            storyTextBox.Text = Utils.tutorialContent;
+            storyTextBox.ForeColor = Color.White;
+            storyTextBox.Font = new Font(Utils.Font, Utils.KFontSize(0.03f, Width, Height));
+            this.Focus();
         }
 
         private void backButton_Click(object sender, EventArgs e)
@@ -41,9 +45,9 @@ namespace Neggatrix.Scenes
             {
                 if (mainForm.WindowState == FormWindowState.Minimized) return;
                 titleLabel.Font = new Font(Utils.Font, Utils.KFontSize(0.08f, Width, Height));
+                mainLayout.Font = new Font(Utils.Font, Utils.KFontSize(0.04f, Width, Height));
                 backButton.Font = new Font(Utils.Font, Utils.KFontSize(0.08f, Width, Height));
-                MVLabel.Font = new Font(Utils.Font, Utils.KFontSize(0.04f, Width, Height));
-                SFXVLabel.Font = new Font(Utils.Font, Utils.KFontSize(0.04f, Width, Height));
+                storyTextBox.Font = new Font(Utils.Font, Utils.KFontSize(0.03f, Width, Height));
             }
         }
     }

@@ -14,9 +14,12 @@ namespace Neggatrix.Presets
         public PolygonRenderer renderer;
         public BoxCollider collider;
 
+        public int Score { get; private set; }
+
         public ScorePoint(PointF position, Color color, int score)
         {
             Name = "ScorePoint";
+            Score = score;
 
             transform = AddComponent<Transform>();
             transform.Position = position;

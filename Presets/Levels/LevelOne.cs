@@ -39,6 +39,10 @@ namespace Neggatrix.Presets.Levels
 
             // --- The High Peak (A wide rest area) ---
             game.AddObject(new Block(new PointF(1500, -800), Color.Black, new SizeF(400, 50)));
+            for (int i =  0; i < 10; i++)
+            {
+                game.AddObject(new ScorePoint(new PointF(1500 + (i*50), -850), Color.White, 10));
+            }
 
             // --- The Long Jump (Testing physics and speed) ---
             game.AddObject(new Block(new PointF(2300, -800), Color.Black, new SizeF(100, 40)));

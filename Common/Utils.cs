@@ -13,6 +13,8 @@ namespace Neggatrix.Common
         public static int gameWindowHeight = 600;
         public static float GlobalGravity = 2000f;
         public static string Font = "Curlz MT";
+        public static string storyContent = "In the depths of the system lies the Neggatrix—a subroutine designed to isolate and eradicate corrupted data. Players control Unit Null, a rogue entity attempting to escape deletion. The world is rendered in stark, jagged polygons representing the raw, unrefined geometry of the machine's subconscious. To survive, Unit Null must evade the gaze of the System Sentinels and exploit glitches (physics anomalies) to traverse the unstable memory blocks of the Shadow World.";
+        public static string tutorialContent = "To survive the Neggatrix, you must exploit the system's own glitches. Scattered throughout the memory blocks are Chromatic Orbs—unstable fragments of data that temporarily rewrite your rendering code.\r\n\r\nHow to Evade Detection:\r\n\r\nIdentify the Sentinel: Observe the color of the enemy's vision cone (e.g., Red).\r\n\r\nLocate a Glitch: Find a matching Red Orb nearby.\r\n\r\nSync: Touch the orb to override your color value.\r\n\r\nInfiltrate: While your color matches the Sentinel's light, you become invisible to their sensors. Walk freely through their vision cones to reach the next sector.\r\n\r\nWarning: The override is temporary.";
 
         public static float Distance(PointF a, PointF b)
         {

@@ -37,9 +37,13 @@
             settingsButton = new Label();
             creditsButton = new Label();
             exitButton = new Label();
+            buttonsPanel2 = new TableLayoutPanel();
+            storyButton = new Label();
+            tutorialButton = new Label();
             mainLayout.SuspendLayout();
             tableLayoutPanel1.SuspendLayout();
             buttonsPanel.SuspendLayout();
+            buttonsPanel2.SuspendLayout();
             SuspendLayout();
             // 
             // mainLayout
@@ -50,6 +54,7 @@
             mainLayout.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 40F));
             mainLayout.Controls.Add(titleLabel, 0, 0);
             mainLayout.Controls.Add(tableLayoutPanel1, 0, 1);
+            mainLayout.Controls.Add(buttonsPanel2, 1, 1);
             mainLayout.Dock = DockStyle.Fill;
             mainLayout.Location = new Point(0, 0);
             mainLayout.Name = "mainLayout";
@@ -191,6 +196,54 @@
             exitButton.TextAlign = ContentAlignment.MiddleCenter;
             exitButton.Click += exitButton_Click;
             // 
+            // buttonsPanel2
+            // 
+            buttonsPanel2.ColumnCount = 1;
+            buttonsPanel2.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 100F));
+            buttonsPanel2.ColumnStyles.Add(new ColumnStyle(SizeType.Absolute, 20F));
+            buttonsPanel2.Controls.Add(storyButton, 0, 0);
+            buttonsPanel2.Controls.Add(tutorialButton, 0, 1);
+            buttonsPanel2.Dock = DockStyle.Fill;
+            buttonsPanel2.Location = new Point(498, 111);
+            buttonsPanel2.Margin = new Padding(0);
+            buttonsPanel2.Name = "buttonsPanel2";
+            buttonsPanel2.RowCount = 3;
+            buttonsPanel2.RowStyles.Add(new RowStyle(SizeType.Percent, 20F));
+            buttonsPanel2.RowStyles.Add(new RowStyle(SizeType.Percent, 20F));
+            buttonsPanel2.RowStyles.Add(new RowStyle(SizeType.Percent, 60F));
+            buttonsPanel2.Size = new Size(333, 444);
+            buttonsPanel2.TabIndex = 2;
+            // 
+            // storyButton
+            // 
+            storyButton.AutoSize = true;
+            storyButton.BackColor = Color.Transparent;
+            storyButton.Dock = DockStyle.Right;
+            storyButton.Location = new Point(249, 0);
+            storyButton.Margin = new Padding(0);
+            storyButton.Name = "storyButton";
+            storyButton.Padding = new Padding(0, 0, 50, 0);
+            storyButton.Size = new Size(84, 88);
+            storyButton.TabIndex = 0;
+            storyButton.Text = "Story";
+            storyButton.TextAlign = ContentAlignment.MiddleRight;
+            storyButton.Click += storyButton_Click;
+            // 
+            // tutorialButton
+            // 
+            tutorialButton.AutoSize = true;
+            tutorialButton.BackColor = Color.Transparent;
+            tutorialButton.Dock = DockStyle.Right;
+            tutorialButton.Location = new Point(235, 88);
+            tutorialButton.Margin = new Padding(0);
+            tutorialButton.Name = "tutorialButton";
+            tutorialButton.Padding = new Padding(0, 0, 50, 0);
+            tutorialButton.Size = new Size(98, 88);
+            tutorialButton.TabIndex = 1;
+            tutorialButton.Text = "Tutorial";
+            tutorialButton.TextAlign = ContentAlignment.MiddleRight;
+            tutorialButton.Click += tutorialButton_Click;
+            // 
             // MainMenu
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
@@ -202,6 +255,8 @@
             tableLayoutPanel1.ResumeLayout(false);
             buttonsPanel.ResumeLayout(false);
             buttonsPanel.PerformLayout();
+            buttonsPanel2.ResumeLayout(false);
+            buttonsPanel2.PerformLayout();
             ResumeLayout(false);
         }
 
@@ -216,5 +271,8 @@
         private Label settingsButton;
         private Label creditsButton;
         private Label exitButton;
+        private TableLayoutPanel buttonsPanel2;
+        private Label storyButton;
+        private Label tutorialButton;
     }
 }

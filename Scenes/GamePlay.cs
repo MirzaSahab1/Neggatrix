@@ -16,7 +16,7 @@ using System.Windows.Forms;
 
 namespace Neggatrix.Scenes
 {
-    public partial class Level1 : UserControl
+    public partial class GamePlay : UserControl
     {
         // Variables Related to Games Time
         private double accumulator = 0;
@@ -24,7 +24,7 @@ namespace Neggatrix.Scenes
         private Stopwatch stopwatch;
         public double lastTime = 0.0f;
 
-        public Level1()
+        public GamePlay()
         {
             InitializeComponent();
             this.Width = Utils.gameWindowWidth;
@@ -42,16 +42,15 @@ namespace Neggatrix.Scenes
         public void Start() // Runs Once At the Start
         {
             // Game
-            game = new Game();
-            game.Audio.MusicVolume = 0.01f; 
-
-            // Player
-            Player player = new Player(new PointF(0, -200), Color.Black, new SizeF(50, 50));
-            player.Name = "Player";
-
-            game.Level.LoadLevel(new LevelOne());
-
-            game.AddObject(player);
+            game = new Game(this);
+            string startLevel = "1"; 
+            if (FileUtils.GetField("data.txt", 5) == "0") { startLevel = FileUtils.GetField("data.txt", 1); }
+            else
+            {
+                startLevel = FileUtils.GetField("data.txt", 5);
+                FileUtils.SaveField("data.txt", 5, "0");
+            }
+            game.Start(startLevel);
         }
         private void GameLoop(object? sender, EventArgs? e)
         {
@@ -66,7 +65,6 @@ namespace Neggatrix.Scenes
                 while (accumulator >= targetDeltaTime) // Runs Every Frame
                 {
                     if (game != null) game.Update(targetDeltaTime);
-
                     accumulator -= targetDeltaTime;
 
                     Invalidate();

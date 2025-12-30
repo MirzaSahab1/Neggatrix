@@ -21,9 +21,9 @@ namespace Neggatrix.Scenes
             DoubleBuffered = true;
             BackgroundImage = Properties.Resources.MainMenuArt__1_;
             BackgroundImageLayout = ImageLayout.Stretch;
-            Level1? level1 = Controls.OfType<Level1>().FirstOrDefault();
+            GamePlay? gamePlay = Controls.OfType<GamePlay>().FirstOrDefault();
 
-            if (level1 != null) Controls[Controls.IndexOf(level1)].Dispose();
+            if (gamePlay != null) Controls[Controls.IndexOf(gamePlay)].Dispose();
             titleLabel.Font = new Font(Utils.Font, Utils.KFontSize(0.035f, Width, Height));
             foreach (Control control in buttonsPanel.Controls)
             {
@@ -34,17 +34,38 @@ namespace Neggatrix.Scenes
                     StyleUtils.ApplyHoverEffect(label);
                 }
             }
+            foreach (Control control in buttonsPanel2.Controls)
+            {
+                if (control is Label label)
+                {
+                    label.Cursor = Cursors.Hand;
+                    label.Font = new Font(Utils.Font, Utils.KFontSize(0.02f, Width, Height));
+                    StyleUtils.ApplyHoverEffect(label);
+                }
+            }
         }
 
         private void mainLayout_Resize(object sender, EventArgs e)
         {
-            
-            titleLabel.Font = new Font(Utils.Font, Utils.KFontSize(0.035f, Width, Height));
-            foreach (Control control in buttonsPanel.Controls)
+            if (Parent?.TopLevelControl is Form mainForm)
             {
-                if (control is Label label)
+                if (mainForm.WindowState == FormWindowState.Minimized) return;
+                titleLabel.Font = new Font(Utils.Font, Utils.KFontSize(0.035f, Width, Height));
+                foreach (Control control in buttonsPanel.Controls)
                 {
-                    label.Font = new Font(Utils.Font, Utils.KFontSize(0.03f, Width, Height));
+                    if (control is Label label)
+                    {
+                        label.Font = new Font(Utils.Font, Utils.KFontSize(0.03f, Width, Height));
+                    }
+                }
+                foreach (Control control in buttonsPanel2.Controls)
+                {
+                    if (control is Label label)
+                    {
+                        label.Cursor = Cursors.Hand;
+                        label.Font = new Font(Utils.Font, Utils.KFontSize(0.02f, Width, Height));
+                        StyleUtils.ApplyHoverEffect(label);
+                    }
                 }
             }
 
@@ -63,7 +84,7 @@ namespace Neggatrix.Scenes
             }
             if (Parent is Panel panel)
             {
-                panel.ShowView<Level1>();
+                panel.ShowView<GamePlay>();
             }
         }
 
@@ -88,6 +109,22 @@ namespace Neggatrix.Scenes
             if (Parent is Panel panel)
             {
                 panel.ShowView<Credits>();
+            }
+        }
+
+        private void storyButton_Click(object sender, EventArgs e)
+        {
+            if (Parent is Panel panel)
+            {
+                panel.ShowView<Story>();
+            }
+        }
+
+        private void tutorialButton_Click(object sender, EventArgs e)
+        {
+            if (Parent is Panel panel)
+            {
+                panel.ShowView<Tutorial>();
             }
         }
     }
