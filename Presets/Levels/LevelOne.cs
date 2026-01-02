@@ -1,4 +1,5 @@
-﻿using Neggatrix.Components;
+﻿using Neggatrix.Common;
+using Neggatrix.Components;
 using Neggatrix.Core;
 using Neggatrix.Interfaces;
 using System;
@@ -46,6 +47,11 @@ namespace Neggatrix.Presets.Levels
 
             // --- The Long Jump (Testing physics and speed) ---
             game.AddObject(new Block(new PointF(2300, -800), Color.Black, new SizeF(100, 40)));
+            for (int i = 0; i < 10; i++)
+            {
+                game.AddObject(new ScorePoint(new PointF(2000 + (i * 50), -50), Color.White, 10));
+            }
+            game.AddObject(new Orb(new PointF(4075, -55), Color.Blue, new Size(50, 50)));
 
             // --- The Vertical Drop (Leads back to the main floor area) ---
             game.AddObject(new Block(new PointF(2800, -600), Color.Black, new SizeF(50, 50)));
@@ -60,10 +66,14 @@ namespace Neggatrix.Presets.Levels
 
             game.AddObject(new Block(new PointF(4600, -520), Color.Black, new SizeF(150, 50)));
 
-            // Cluster 2: The High Canopy
+            // Cluster 2: The High Canopyw
             game.AddObject(new Block(new PointF(5000, -620), Color.Black, new SizeF(400, 50)));
             game.AddObject(new Block(new PointF(5500, -670), Color.Black, new SizeF(400, 50)));
 
+            for (int i = 0; i < 40; i++)
+            {
+                game.AddObject(new ScorePoint(new PointF(5000 + (i * 50), -50), Color.White, 10));
+            }
             // Cluster 3: The Jagged Descent
             game.AddObject(new Block(new PointF(6200, -500), Color.Black, new SizeF(100, 100)));
             game.AddObject(new Block(new PointF(6500, -300), Color.Black, new SizeF(100, 100)));
@@ -81,6 +91,7 @@ namespace Neggatrix.Presets.Levels
             Block exit = new Block(new PointF(8500, -1100), Color.Black, new SizeF(180, 180));
             exit.Name = "LevelExit";
             exit.collider.IsTrigger = true;
+            exit.renderer.Sprite = Properties.Resources.Gateway;
             exit.renderer.BGColor = Color.FromArgb(50, 0, 255, 0);
             game.AddObject(exit);
         }

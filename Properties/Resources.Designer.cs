@@ -83,6 +83,16 @@ namespace Neggatrix.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
+        internal static System.Drawing.Bitmap Gateway {
+            get {
+                object obj = ResourceManager.GetObject("Gateway", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
         internal static System.Drawing.Bitmap Gemini_Generated_Image_ngstlgngstlgngst {
             get {
                 object obj = ResourceManager.GetObject("Gemini_Generated_Image_ngstlgngstlgngst", resourceCulture);

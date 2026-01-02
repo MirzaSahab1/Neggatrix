@@ -125,7 +125,7 @@ namespace Neggatrix.Presets
                     // mb.Location = new Point(Game.gamePlayForm.Width / 4, Game.gamePlayForm.Height / 4);
                     //Game.gamePlayForm.Controls.Add(mb);
                     //Game.IsStopped = true;
-                    Game.Restart();
+                    //Game.Restart();
                 }
             };
         }

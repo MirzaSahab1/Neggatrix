@@ -15,7 +15,22 @@ namespace Neggatrix.Components
     {
         public required GameObject Owner { get; set; }
 
-        public Image? Sprite { get; set; }
+        private Image? _sprite;
+        public Image? Sprite 
+        {
+            get => _sprite;
+            set
+            {
+                _sprite = value;
+                if (_sprite != null)
+                {
+                    if (ImageAnimator.CanAnimate(_sprite))
+                    {
+                        ImageAnimator.Animate(_sprite, (o, e) => { });
+                    }
+                }
+            }
+        }
         public Color BGColor { get; set; }
 
 
@@ -50,7 +65,7 @@ namespace Neggatrix.Components
             // 2. Rotate
             g.RotateTransform(_transform.Rotation);
 
-            // 3. Apply Local Offset (NEW CODE)
+            // 3. Apply Local Offset
             // We multiply by Scale so the offset grows if the object grows
             g.TranslateTransform(
                 Offset.X * _transform.Scale.X,
@@ -80,6 +95,10 @@ namespace Neggatrix.Components
 
             if (Sprite != null)
             {
+                if (ImageAnimator.CanAnimate(Sprite))
+                {
+                    ImageAnimator.UpdateFrames(Sprite);
+                }
                 g.DrawImage(Sprite, relativeRect);
             }
 
