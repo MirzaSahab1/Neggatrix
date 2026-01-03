@@ -34,6 +34,18 @@ namespace Neggatrix.Scenes
 
                 }
             }
+            int savedLevel = int.Parse(FileUtils.GetField("data.txt", 1));
+            foreach(var btn in buttonsPanel.Controls)
+            {
+                if (btn is Button bttn)
+                {
+                    if (int.Parse(bttn.Text) > savedLevel)
+                    {
+                        bttn.BackColor = Color.Gray;
+                        bttn.Enabled = false;
+                    }
+                }
+            }
         }
 
         private void backButton_Click(object sender, EventArgs e)

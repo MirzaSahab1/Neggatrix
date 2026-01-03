@@ -19,7 +19,11 @@ namespace Neggatrix.Presets.Levels
             // Floor is at Y=0, Height is 50
             game.AddObject(new Block(new PointF(6800, 0), shadow, new SizeF(15000, 50)));
             game.AddObject(new Block(new PointF(-675, -300), shadow, new SizeF(50, 600))); // Starting Wall
-
+            game.AddObject(new Orb(new PointF(-600, -55), Color.Green, new Size(50, 50)));
+            game.AddObject(new Enemy(new PointF(550, -400), Color.Green, 400f, 200f));
+            game.AddObject(new Enemy(new PointF(1500, -400), Color.Green, 400f, 150f));
+            game.AddObject(new Enemy(new PointF(2500, -400), Color.Green, 400f, 250f));
+            game.AddObject(new Enemy(new PointF(4300, -400), Color.Red, 2000f, 650f));
             // --- Section 1: The Jagged Entrance (0 - 3000) ---
             // Staggered stairs and low ceilings
             game.AddObject(new Block(new PointF(400, -150), shadow, new SizeF(200, 50)));
@@ -27,22 +31,24 @@ namespace Neggatrix.Presets.Levels
             game.AddObject(new Block(new PointF(1200, -450), shadow, new SizeF(200, 50)));
 
             // A "Crusher" ceiling (static)
-            game.AddObject(new Block(new PointF(2000, -750), shadow, new SizeF(1000, 100)));
-
+            game.AddObject(new Block(new PointF(2000, -660), shadow, new SizeF(1000, 100)));
+            for (int i = 0; i < 10; i++)
+            {
+                game.AddObject(new ScorePoint(new PointF(1500 + (i * 50), -750), Color.White, 10));
+            }
             // --- Section 2: The Vertical Shaft (3000 - 6000) ---
             // More crowded, requiring zig-zag jumping
             for (int i = 0; i < 6; i++)
             {
                 float xPos = 3200 + (i * 400);
-                float yPos = -200 - (i * 150); // Multiples of 50
+                float yPos = -200 - (i * 150); 
                 game.AddObject(new Block(new PointF(xPos, yPos), shadow, new SizeF(150, 50)));
 
-                // Add a "Floating Spike" (non-collidable block or just an obstacle)
                 game.AddObject(new Block(new PointF(xPos + 200, yPos - 100), shadow, new SizeF(50, 50)));
+                game.AddObject(new ScorePoint(new PointF(xPos + 200 ,(yPos - 100)-50), Color.White, 10));
             }
 
-            // --- Section 3: The Moving Void (6000 - 9000) ---
-            // Crowded moving platforms. Ensure game.AddObject happens BEFORE AddComponent.
+            
             Block m1 = new Block(new PointF(6500, -500), shadow, new SizeF(200, 50));
             game.AddObject(m1);
 
@@ -53,6 +59,10 @@ namespace Neggatrix.Presets.Levels
             // Narrow corridors made of large blocks
             game.AddObject(new Block(new PointF(10000, -200), shadow, new SizeF(1000, 50))); // Floor
             game.AddObject(new Block(new PointF(10000, -500), shadow, new SizeF(1000, 50))); // Ceiling
+            for (int i = 0; i < 10; i++)
+            {
+                game.AddObject(new ScorePoint(new PointF(10000 + (i * 50), -250), Color.White, 10));
+            }
 
             // Pillars inside the cage
             game.AddObject(new Block(new PointF(10300, -350), shadow, new SizeF(50, 150)));
@@ -72,7 +82,14 @@ namespace Neggatrix.Presets.Levels
                 float xPos = 13000 + (i * 140);
                 float yPos = -600 - (i * 100);
                 game.AddObject(new Block(new PointF(xPos, yPos), shadow, new SizeF(100, 50)));
+                game.AddObject(new ScorePoint(new PointF(xPos, yPos-50), Color.White, 10));
             }
+            Block exit = new Block(new PointF(14200, -2000), Color.Black, new SizeF(180, 180));
+            exit.Name = "LevelExit";
+            exit.collider.IsTrigger = true;
+            exit.renderer.Sprite = Properties.Resources.Gateway;
+            exit.renderer.BGColor = Color.FromArgb(50, 0, 255, 0);
+            game.AddObject(exit);
         }
     }
 }

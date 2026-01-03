@@ -17,6 +17,7 @@ namespace Neggatrix.Presets
     {
         public float Health { get; set; }
         public int Score { get; private set; }
+        public int level { get; private set; }
 
         public Transform transform;
         public PolygonRenderer renderer;
@@ -28,8 +29,9 @@ namespace Neggatrix.Presets
         public Time timer;
         public Script script;
 
-        public Player(PointF position, Color color, SizeF size)
+        public Player(PointF position, Color color, SizeF size, int level)
         {
+            this.level = level;
             Health = 100.0f;
             Score = 0;
             transform = AddComponent<Transform>();
@@ -71,7 +73,26 @@ namespace Neggatrix.Presets
                     {
                         transform.Position = new PointF(0, -200);
                         camera.Start();
-                        Game?.Level.LoadLevel(new LevelTwo());
+                        if (level == 1)
+                        {
+                            Game?.Level.LoadLevel(new LevelTwo());
+                            level++;
+                        }
+                        else if (level == 2)
+                        {
+                            Game?.Level.LoadLevel(new LevelThree());
+                            level++;
+                        }
+                        else if (level == 3)
+                        {
+                            Game?.Level?.LoadLevel(new LevelFour());
+                            level++;
+                        }
+                        else if (level == 4)
+                        {
+                            Game?.Level?.LoadLevel(new LevelFive());
+                            level++;
+                        }
                     }
                     if (hitObject.Name == "RedOrb")
                     {
@@ -96,7 +117,7 @@ namespace Neggatrix.Presets
                         ScorePoint point = (ScorePoint)hitObject;
                         Score += point.Score;
                         Game?.Objects.Remove(hitObject);
-                        Game.gamePlayForm.score.Text += point.Score;
+                        if (Game != null) Game.gamePlayForm.score.Text += point.Score;
                     }
                 }
 
@@ -107,6 +128,7 @@ namespace Neggatrix.Presets
                     animator.AddTrack("Transform", "Rotation", 0f, 360f, 1f, true, () => !physicsBody.IsGrounded);
                 }
             };
+            
         }
 
         public void TakeDamage(float amount)

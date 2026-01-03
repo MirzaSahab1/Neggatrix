@@ -78,10 +78,7 @@ namespace Neggatrix.Scenes
 
         private void startButton_Click(object sender, EventArgs e)
         {
-            if (TopLevelControl is Form form)
-            {
-                form.BackgroundImage = null;
-            }
+
             if (Parent is Panel panel)
             {
                 panel.ShowView<GamePlay>();

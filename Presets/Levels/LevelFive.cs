@@ -41,6 +41,7 @@ namespace Neggatrix.Presets.Levels
 
                 // The actual jump: a tiny "shard" broken off the rib
                 game.AddObject(new Block(new PointF(x + 250, -450), shadow, new SizeF(50, 50)));
+                game.AddObject(new ScorePoint(new PointF(x + 250, -500), Color.White, 10));
             }
 
             // --- SECTION 2: THE INK RAIN (X: 5500 - 9000) ---
@@ -52,7 +53,7 @@ namespace Neggatrix.Presets.Levels
                 float y = -rng.Next(0, 1500);
                 y = (float)(Math.Round(y / 50.0) * 50);
 
-                // Make them thin and vary the alpha slightly if your Color supports it
+                // Make them thin and vary the alpha slightly
                 var rain = new Block(new PointF(x, y), Color.FromArgb(128, 255, 0, 0), new SizeF(10, rng.Next(50, 250)));
 
                 // Ensure these are ghost objects
@@ -101,6 +102,7 @@ namespace Neggatrix.Presets.Levels
                     if ((Math.Sin(x * 0.01) + Math.Cos(y * 0.01)) > 0.5)
                     {
                         game.AddObject(new Block(new PointF(x, y), shadow, new SizeF(150, 150)));
+                        game.AddObject(new ScorePoint(new PointF(x, y-100), Color.White, 10));
                     }
                 }
             }
@@ -114,10 +116,17 @@ namespace Neggatrix.Presets.Levels
                 y = (float)(Math.Round(y / 50.0) * 50);
 
                 game.AddObject(new Block(new PointF(x, y), shadow, new SizeF(50, 50)));
+                if (i % 2 == 0) game.AddObject(new ScorePoint(new PointF(x, y-50), Color.White, 10));
             }
 
             // The End: A massive vertical abyss
             game.AddObject(new Block(new PointF(14950, -2000), shadow, new SizeF(50, 3000)));
+            Block exit = new Block(new PointF(14900, 0), Color.Black, new SizeF(180, 180));
+            exit.Name = "LevelExit";
+            exit.collider.IsTrigger = true;
+            exit.renderer.Sprite = Properties.Resources.Gateway;
+            exit.renderer.BGColor = Color.FromArgb(50, 0, 255, 0);
+            game.AddObject(exit);
         }
     }
 }

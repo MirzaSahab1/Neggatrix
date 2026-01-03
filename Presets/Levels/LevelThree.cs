@@ -25,7 +25,11 @@ namespace Neggatrix.Presets.Levels
             game.AddObject(new Block(new PointF(7700, 0), shadow, new SizeF(2000, 50)));
             // Hole at 9700-10200
             game.AddObject(new Block(new PointF(10200, 0), shadow, new SizeF(4800, 50)));
-
+            
+            game.AddObject(new Enemy(new PointF(2700, -400), Color.Red, 400f, 200f));
+            game.AddObject(new Block(new PointF(3700, -350), Color.Black, new SizeF(50, 50)));
+            game.AddObject(new Orb(new PointF(7000, -700), Color.Red, new Size(50, 50)));
+            game.AddObject(new Enemy(new PointF(7700, -300), Color.Red, 400f, 200f));
             // --- THE "CROWDED" CLUTTER (Visual Only) ---
             // These blocks won't have BoxColliders (assuming your Block constructor 
             // allows you to toggle colliders, or you just make a "VisualBlock" class)
@@ -51,15 +55,12 @@ namespace Neggatrix.Presets.Levels
 
                 // The Main Path
                 game.AddObject(new Block(new PointF(x, yBase), shadow, new SizeF(250, 50)));
-
+                game.AddObject(new ScorePoint(new PointF(x, yBase-50), Color.White, 10));
                 // "Cluttered" debris attached to platforms
                 game.AddObject(new Block(new PointF(x + 50, yBase - 50), shadow, new SizeF(50, 50)));
                 game.AddObject(new Block(new PointF(x + 150, yBase + 50), shadow, new SizeF(50, 100)));
             }
 
-            // --- THE ROTATED VISUALS (Faking it) ---
-            // Since we aren't doing rotated collisions, we can use very thin 
-            // vertical/horizontal bars to simulate "girders" leaning against platforms.
             for (int x = 1000; x < 14000; x += 1200)
             {
                 // Long thin vertical beams
@@ -77,6 +78,12 @@ namespace Neggatrix.Presets.Levels
                 // Stalactites hanging down
                 game.AddObject(new Block(new PointF(x, -1100), shadow, new SizeF(50, 250)));
             }
+            Block exit = new Block(new PointF(15000, -100), Color.Black, new SizeF(180, 180));
+            exit.Name = "LevelExit";
+            exit.collider.IsTrigger = true;
+            exit.renderer.Sprite = Properties.Resources.Gateway;
+            exit.renderer.BGColor = Color.FromArgb(50, 0, 255, 0);
+            game.AddObject(exit);
         }
     }
 }

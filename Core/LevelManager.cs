@@ -11,7 +11,7 @@ namespace Neggatrix.Core
     public class LevelManager
     {
         private Game _game;
-
+        public ILevel? currentLevel;
         public LevelManager(Game game)
         {
             _game = game;
@@ -19,6 +19,7 @@ namespace Neggatrix.Core
 
         public void LoadLevel(ILevel level)
         {
+            currentLevel = level;
             _game.Objects.RemoveAll(obj => !(obj is Player));
 
             level.Build(_game);

@@ -40,6 +40,7 @@ namespace Neggatrix.Presets.Levels
 
                 game.AddObject(new Block(new PointF(x, y1), shadow, new SizeF(100, 50)));
                 game.AddObject(new Block(new PointF(x, y2), shadow, new SizeF(100, 50)));
+                game.AddObject(new ScorePoint(new PointF(x, y2-50), Color.White, 10));
 
                 // Artistic "Connectors" (Visual Only - no colliders)
                 var beam = new Block(new PointF(x + 40, (Utils.Distance(new PointF(0, y1), new PointF(0, y2)) / Math.Max(y1, y2)) - 375), structureColor, new SizeF(20, Math.Abs(y1 - y2)));
@@ -61,6 +62,7 @@ namespace Neggatrix.Presets.Levels
                 // The challenging jumps attached to the ribs
                 game.AddObject(new Block(new PointF(x - 50, -300), shadow, new SizeF(200, 50)));
                 game.AddObject(new Block(new PointF(x + 150, -500), shadow, new SizeF(50, 50))); // Precision landing
+                game.AddObject(new ScorePoint(new PointF(x + 150, -550), Color.White, 10));
             }
             game.AddObject(new Block(new PointF(10100, -650), shadow, new SizeF(50, 50)));
             // --- SECTION 3: THE BROKEN CATHEDRAL (X: 10500 - 14000) ---
@@ -75,6 +77,7 @@ namespace Neggatrix.Presets.Levels
 
                 // Tiny debris jumps between towers
                 game.AddObject(new Block(new PointF(x + 300, -450), shadow, new SizeF(50, 50)));
+                game.AddObject(new ScorePoint(new PointF(x + 300, -500), Color.White, 10));
             }
 
             // --- THE FINAL ABYSS JUMP ---
@@ -91,6 +94,12 @@ namespace Neggatrix.Presets.Levels
             game.AddObject(new Block(new PointF(14650, -1750), Color.Black, new SizeF(100, 20)));
             game.AddObject(new Block(new PointF(14500, -1990), Color.Black, new SizeF(100, 20)));
             game.AddObject(new Block(new PointF(14650, -2220), Color.Black, new SizeF(100, 20)));
+            Block exit = new Block(new PointF(14900, -2000), Color.Black, new SizeF(180, 180));
+            exit.Name = "LevelExit";
+            exit.collider.IsTrigger = true;
+            exit.renderer.Sprite = Properties.Resources.Gateway;
+            exit.renderer.BGColor = Color.FromArgb(50, 0, 255, 0);
+            game.AddObject(exit);
         }
     }
 }

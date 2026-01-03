@@ -47,11 +47,8 @@ namespace Neggatrix.Core
 
         public void Start(string level)
         {
-            Audio.MusicVolume = 0.01f;
-
-            // Player
-            Player player = new Player(new PointF(0, -200), Color.Black, new SizeF(50, 50));
-            player.Name = "Player";
+            Audio.MusicVolume = 0.5f;
+            //Audio.PlayMusic("D:\\Neggatrix\\Neggatrix\\Assets\\Audio\\BackgroundMusic.mp3");
 
             ILevel startLevel;
             if (level == "1") startLevel = new LevelOne();
@@ -62,6 +59,9 @@ namespace Neggatrix.Core
             else startLevel = new LevelOne();
 
             Level.LoadLevel(startLevel);
+            // Player
+            Player player = new Player(new PointF(0, -200), Color.Black, new SizeF(50, 50), int.Parse(level));
+            player.Name = "Player";
 
             AddObject(player);
         }

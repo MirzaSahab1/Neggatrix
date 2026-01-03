@@ -8,8 +8,6 @@ using Topshelf.Runtime;
 using System.ServiceProcess;
 using System.Runtime.InteropServices;
 using Neggatrix.Common;
-using EZInput;
-using Neggatrix.Presets;
 using Neggatrix.Scenes;
 
 namespace Neggatrix
