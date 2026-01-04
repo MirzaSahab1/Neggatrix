@@ -40,10 +40,8 @@ namespace Neggatrix.Scenes
 
         public void exitButton_Click(object sender, EventArgs e)
         {
-            Console.Write("Fuck");
             if (Parent.Parent is Panel panel)
             {
-                Console.Write("Fuck2");
                 panel.ShowView<MainMenu>();
             }
         }

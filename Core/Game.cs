@@ -47,8 +47,9 @@ namespace Neggatrix.Core
 
         public void Start(string level)
         {
-            Audio.MusicVolume = 0.5f;
-            //Audio.PlayMusic("D:\\Neggatrix\\Neggatrix\\Assets\\Audio\\BackgroundMusic.mp3");
+            Audio.MusicVolume = float.Parse(FileUtils.GetField("data.txt", 2));
+            Audio.SfxVolume = float.Parse(FileUtils.GetField("data.txt", 3));
+            Audio.PlayMusic("D:\\Neggatrix\\Neggatrix\\Assets\\Audio\\BackgroundMusic.mp3");
 
             ILevel startLevel;
             if (level == "1") startLevel = new LevelOne();
@@ -95,10 +96,19 @@ namespace Neggatrix.Core
             IsPaused = false;
             IsStopped = false;
             Audio = new AudioManager();
+            Audio.MusicVolume = float.Parse(FileUtils.GetField("data.txt", 2));
+            Audio.SfxVolume = float.Parse(FileUtils.GetField("data.txt", 3));
+            Audio.PlaySound("D:\\Neggatrix\\Neggatrix\\Assets\\Audio\\Death.mp3");
 
-            Level = new LevelManager(this);
-            mb = new MessageBox("Paused", "Resume");
-            Start("1");
+            //Level = new LevelManager(this);
+            //mb = new MessageBox("Paused", "Resume");
+            string level = "1";
+            if (Level.currentLevel is LevelOne) level = "1";
+            else if (Level.currentLevel is LevelTwo) level = "2";
+            else if (Level.currentLevel is LevelThree) level = "3";
+            else if (Level.currentLevel is LevelFour) level = "4";
+            else if (Level.currentLevel is LevelFive) level = "5";
+            Start(level);
         }
         public void Render(Graphics g, int viewWidth, int viewHeight)
         {

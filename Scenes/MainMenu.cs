@@ -24,7 +24,7 @@ namespace Neggatrix.Scenes
             GamePlay? gamePlay = Controls.OfType<GamePlay>().FirstOrDefault();
 
             if (gamePlay != null) Controls[Controls.IndexOf(gamePlay)].Dispose();
-            titleLabel.Font = new Font(Utils.Font, Utils.KFontSize(0.035f, Width, Height));
+            titleLabel.Font = new Font(Utils.Font, Utils.KFontSize(0.05f, Width, Height));
             foreach (Control control in buttonsPanel.Controls)
             {
                 if (control is Label label)
@@ -43,6 +43,7 @@ namespace Neggatrix.Scenes
                     StyleUtils.ApplyHoverEffect(label);
                 }
             }
+            highScore.Text = "High Score: " + FileUtils.GetField("data.txt", 4);
         }
 
         private void mainLayout_Resize(object sender, EventArgs e)
@@ -50,7 +51,7 @@ namespace Neggatrix.Scenes
             if (Parent?.TopLevelControl is Form mainForm)
             {
                 if (mainForm.WindowState == FormWindowState.Minimized) return;
-                titleLabel.Font = new Font(Utils.Font, Utils.KFontSize(0.035f, Width, Height));
+                titleLabel.Font = new Font(Utils.Font, Utils.KFontSize(0.06f, Width, Height));
                 foreach (Control control in buttonsPanel.Controls)
                 {
                     if (control is Label label)
@@ -123,6 +124,11 @@ namespace Neggatrix.Scenes
             {
                 panel.ShowView<Tutorial>();
             }
+        }
+
+        private void titleLabel_Click(object sender, EventArgs e)
+        {
+
         }
     }
 }

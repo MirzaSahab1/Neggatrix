@@ -28,5 +28,8 @@
     <Compile Update="Scenes\Tutorial.cs">
       <SubType>UserControl</SubType>
     </Compile>
+    <Compile Update="Scenes\WinScreen.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
   </ItemGroup>
 </Project>

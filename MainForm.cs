@@ -36,7 +36,7 @@ namespace Neggatrix
         private void MainForm_Load(object sender, EventArgs e)
         {
             BackgroundImage = null;
-            panel1.ShowView<GamePlay>();
+            panel1.ShowView<MainMenu>();
         }
         protected override CreateParams CreateParams
         {

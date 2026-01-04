@@ -31,8 +31,8 @@
             mainLayout = new TableLayoutPanel();
             titleLabel = new Label();
             backButton = new Label();
-            volumeSlider1 = new NAudio.Gui.VolumeSlider();
-            volumeSlider2 = new NAudio.Gui.VolumeSlider();
+            musicVolume = new NAudio.Gui.VolumeSlider();
+            sfxVolume = new NAudio.Gui.VolumeSlider();
             MVLabel = new Label();
             SFXVLabel = new Label();
             mainLayout.SuspendLayout();
@@ -46,8 +46,8 @@
             mainLayout.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 10F));
             mainLayout.Controls.Add(titleLabel, 1, 0);
             mainLayout.Controls.Add(backButton, 0, 0);
-            mainLayout.Controls.Add(volumeSlider1, 1, 2);
-            mainLayout.Controls.Add(volumeSlider2, 1, 4);
+            mainLayout.Controls.Add(musicVolume, 1, 2);
+            mainLayout.Controls.Add(sfxVolume, 1, 4);
             mainLayout.Controls.Add(MVLabel, 1, 1);
             mainLayout.Controls.Add(SFXVLabel, 1, 3);
             mainLayout.Dock = DockStyle.Fill;
@@ -88,23 +88,23 @@
             backButton.TextAlign = ContentAlignment.MiddleCenter;
             backButton.Click += backButton_Click;
             // 
-            // volumeSlider1
+            // musicVolume
             // 
-            volumeSlider1.BackColor = Color.White;
-            volumeSlider1.Dock = DockStyle.Fill;
-            volumeSlider1.Location = new Point(99, 188);
-            volumeSlider1.Name = "volumeSlider1";
-            volumeSlider1.Size = new Size(762, 65);
-            volumeSlider1.TabIndex = 3;
+            musicVolume.BackColor = Color.White;
+            musicVolume.Dock = DockStyle.Fill;
+            musicVolume.Location = new Point(99, 188);
+            musicVolume.Name = "musicVolume";
+            musicVolume.Size = new Size(762, 65);
+            musicVolume.TabIndex = 3;
             // 
-            // volumeSlider2
+            // sfxVolume
             // 
-            volumeSlider2.BackColor = Color.White;
-            volumeSlider2.Dock = DockStyle.Fill;
-            volumeSlider2.Location = new Point(99, 330);
-            volumeSlider2.Name = "volumeSlider2";
-            volumeSlider2.Size = new Size(762, 65);
-            volumeSlider2.TabIndex = 4;
+            sfxVolume.BackColor = Color.White;
+            sfxVolume.Dock = DockStyle.Fill;
+            sfxVolume.Location = new Point(99, 330);
+            sfxVolume.Name = "sfxVolume";
+            sfxVolume.Size = new Size(762, 65);
+            sfxVolume.TabIndex = 4;
             // 
             // MVLabel
             // 
@@ -145,8 +145,8 @@
         private TableLayoutPanel mainLayout;
         private Label titleLabel;
         private Label backButton;
-        private NAudio.Gui.VolumeSlider volumeSlider1;
-        private NAudio.Gui.VolumeSlider volumeSlider2;
+        private NAudio.Gui.VolumeSlider musicVolume;
+        private NAudio.Gui.VolumeSlider sfxVolume;
         private Label MVLabel;
         private Label SFXVLabel;
     }

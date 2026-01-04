@@ -25,6 +25,10 @@ namespace Neggatrix.Scenes
             SFXVLabel.Font = new Font(Utils.Font, Utils.KFontSize(0.04f, Width, Height));
             backButton.Cursor = Cursors.Hand;
             StyleUtils.ApplyHoverEffect(backButton);
+            musicVolume.VolumeChanged += musicVloume_OnChange;
+            sfxVolume.VolumeChanged += sfxVloume_OnChange;
+            musicVolume.Volume = float.Parse(FileUtils.GetField("data.txt", 2));
+            sfxVolume.Volume = float.Parse(FileUtils.GetField("data.txt", 3));
         }
 
         private void backButton_Click(object sender, EventArgs e)
@@ -45,6 +49,14 @@ namespace Neggatrix.Scenes
                 MVLabel.Font = new Font(Utils.Font, Utils.KFontSize(0.04f, Width, Height));
                 SFXVLabel.Font = new Font(Utils.Font, Utils.KFontSize(0.04f, Width, Height));
             }
+        }
+        private void musicVloume_OnChange(object sender, EventArgs e)
+        {
+            FileUtils.SaveField("data.txt", 2, musicVolume.Volume.ToString());
+        }
+        private void sfxVloume_OnChange(object sender, EventArgs e)
+        {
+            FileUtils.SaveField("data.txt", 3, sfxVolume.Volume.ToString());
         }
     }
 }

@@ -28,30 +28,30 @@
         /// </summary>
         private void InitializeComponent()
         {
-            tableLayoutPanel1 = new TableLayoutPanel();
+            hudLayout = new TableLayoutPanel();
             score = new Label();
             level = new Label();
             info = new Label();
-            tableLayoutPanel1.SuspendLayout();
+            hudLayout.SuspendLayout();
             SuspendLayout();
             // 
-            // tableLayoutPanel1
+            // hudLayout
             // 
-            tableLayoutPanel1.BackColor = Color.Transparent;
-            tableLayoutPanel1.ColumnCount = 3;
-            tableLayoutPanel1.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 15F));
-            tableLayoutPanel1.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 70F));
-            tableLayoutPanel1.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 15F));
-            tableLayoutPanel1.Controls.Add(score, 0, 0);
-            tableLayoutPanel1.Controls.Add(level, 1, 0);
-            tableLayoutPanel1.Controls.Add(info, 2, 0);
-            tableLayoutPanel1.Dock = DockStyle.Top;
-            tableLayoutPanel1.Location = new Point(0, 0);
-            tableLayoutPanel1.Name = "tableLayoutPanel1";
-            tableLayoutPanel1.RowCount = 1;
-            tableLayoutPanel1.RowStyles.Add(new RowStyle(SizeType.Absolute, 50F));
-            tableLayoutPanel1.Size = new Size(1056, 41);
-            tableLayoutPanel1.TabIndex = 0;
+            hudLayout.BackColor = Color.Transparent;
+            hudLayout.ColumnCount = 3;
+            hudLayout.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 25F));
+            hudLayout.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 50F));
+            hudLayout.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 25F));
+            hudLayout.Controls.Add(score, 0, 0);
+            hudLayout.Controls.Add(level, 1, 0);
+            hudLayout.Controls.Add(info, 2, 0);
+            hudLayout.Dock = DockStyle.Top;
+            hudLayout.Location = new Point(0, 0);
+            hudLayout.Name = "hudLayout";
+            hudLayout.RowCount = 1;
+            hudLayout.RowStyles.Add(new RowStyle(SizeType.Absolute, 50F));
+            hudLayout.Size = new Size(1056, 41);
+            hudLayout.TabIndex = 0;
             // 
             // score
             // 
@@ -61,7 +61,7 @@
             score.Location = new Point(0, 0);
             score.Margin = new Padding(0);
             score.Name = "score";
-            score.Size = new Size(158, 50);
+            score.Size = new Size(264, 50);
             score.TabIndex = 0;
             score.Text = "label1";
             score.TextAlign = ContentAlignment.MiddleCenter;
@@ -71,10 +71,10 @@
             level.AutoSize = true;
             level.Dock = DockStyle.Fill;
             level.ForeColor = Color.White;
-            level.Location = new Point(158, 0);
+            level.Location = new Point(264, 0);
             level.Margin = new Padding(0);
             level.Name = "level";
-            level.Size = new Size(739, 50);
+            level.Size = new Size(528, 50);
             level.TabIndex = 1;
             level.Text = "label2";
             level.TextAlign = ContentAlignment.MiddleCenter;
@@ -84,10 +84,10 @@
             info.AutoSize = true;
             info.Dock = DockStyle.Fill;
             info.ForeColor = Color.White;
-            info.Location = new Point(897, 0);
+            info.Location = new Point(792, 0);
             info.Margin = new Padding(0);
             info.Name = "info";
-            info.Size = new Size(159, 50);
+            info.Size = new Size(264, 50);
             info.TabIndex = 2;
             info.Text = "label3";
             info.TextAlign = ContentAlignment.MiddleCenter;
@@ -98,18 +98,18 @@
             AutoScaleMode = AutoScaleMode.Font;
             BackgroundImage = Properties.Resources.Gemini_Generated_Image_ngstlgngstlgngst;
             BackgroundImageLayout = ImageLayout.Stretch;
-            Controls.Add(tableLayoutPanel1);
+            Controls.Add(hudLayout);
             DoubleBuffered = true;
             Name = "GamePlay";
             Size = new Size(1056, 660);
-            tableLayoutPanel1.ResumeLayout(false);
-            tableLayoutPanel1.PerformLayout();
+            hudLayout.ResumeLayout(false);
+            hudLayout.PerformLayout();
             ResumeLayout(false);
         }
 
         #endregion
 
-        private TableLayoutPanel tableLayoutPanel1;
+        private TableLayoutPanel hudLayout;
         public Label score;
         public Label level;
         public Label info;

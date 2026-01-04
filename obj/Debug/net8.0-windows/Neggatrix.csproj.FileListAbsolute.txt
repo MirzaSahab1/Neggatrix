@@ -51,3 +51,4 @@ D:\Neggatrix\Neggatrix\obj\Debug\net8.0-windows\Neggatrix.Scenes.GamePlay.resour
 D:\Neggatrix\Neggatrix\obj\Debug\net8.0-windows\Neggatrix.Scenes.Story.resources
 D:\Neggatrix\Neggatrix\obj\Debug\net8.0-windows\Neggatrix.Scenes.Tutorial.resources
 D:\Neggatrix\Neggatrix\obj\Debug\net8.0-windows\Neggatrix.Scenes.MessageBox.resources
+D:\Neggatrix\Neggatrix\obj\Debug\net8.0-windows\Neggatrix.Scenes.WinScreen.resources

@@ -15,8 +15,7 @@ namespace Neggatrix.Presets
 {
     public class Player : GameObject
     {
-        public float Health { get; set; }
-        public int Score { get; private set; }
+        public int Score { get;  set; }
         public int level { get; private set; }
 
         public Transform transform;
@@ -32,7 +31,6 @@ namespace Neggatrix.Presets
         public Player(PointF position, Color color, SizeF size, int level)
         {
             this.level = level;
-            Health = 100.0f;
             Score = 0;
             transform = AddComponent<Transform>();
             transform.Position = position;
@@ -65,12 +63,16 @@ namespace Neggatrix.Presets
             script = AddComponent<Script>();
             script.OnUpdate = (deltaTime) =>
             {
+                if (transform.Position.Y > 1000) Game.Restart();
                 movement.Move();
-
+                
+                Game.gamePlayForm.level.Text = "Level: " + level;
                 foreach (var hitObject in physicsBody.ActiveCollisions)
                 {
                     if (hitObject.Name == "LevelExit")
                     {
+                        if (int.Parse(FileUtils.GetField("data.txt", 4)) < Score)
+                            FileUtils.SaveField("data.txt", 4, Score.ToString());
                         transform.Position = new PointF(0, -200);
                         camera.Start();
                         if (level == 1)
@@ -93,31 +95,45 @@ namespace Neggatrix.Presets
                             Game?.Level?.LoadLevel(new LevelFive());
                             level++;
                         }
+                        else if (level == 5)
+                        {
+                            Game?.Audio.PlaySound("D:\\Neggatrix\\Neggatrix\\Assets\\Audio\\Win.mp3");
+                            Game?.gamePlayForm.GotoWin();
+                        }
+                        int saved = int.Parse(FileUtils.GetField("data.txt", 1));
+                        if (saved < level)
+                        {
+                            FileUtils.SaveField("data.txt", 1, level.ToString());
+                        }
                     }
                     if (hitObject.Name == "RedOrb")
                     {
+                        Game.Audio.PlaySound("D:\\Neggatrix\\Neggatrix\\Assets\\Audio\\Coin.mp3");
                         renderer.FillColor = Color.Red;
                         timer.Play();
                         Game?.Objects.Remove(hitObject);
                     }
                     else if (hitObject.Name == "BlueOrb")
                     {
+                        Game.Audio.PlaySound("D:\\Neggatrix\\Neggatrix\\Assets\\Audio\\Coin.mp3");
                         renderer.FillColor = Color.Blue;
                         timer.Play();
                         Game?.Objects.Remove(hitObject);
                     }
                     else if (hitObject.Name == "GreenOrb")
                     {
+                         Game.Audio.PlaySound("D:\\Neggatrix\\Neggatrix\\Assets\\Audio\\Coin.mp3");
                         renderer.FillColor = Color.Green;
                         timer.Play();
                         Game?.Objects.Remove(hitObject);
                     }
                     else if (hitObject.Name == "ScorePoint")
                     {
+                        Game.Audio.PlaySound("D:\\Neggatrix\\Neggatrix\\Assets\\Audio\\Coin.mp3");
                         ScorePoint point = (ScorePoint)hitObject;
                         Score += point.Score;
                         Game?.Objects.Remove(hitObject);
-                        if (Game != null) Game.gamePlayForm.score.Text += point.Score;
+                        if (Game != null) Game.gamePlayForm.score.Text = "Score: " + Score;
                     }
                 }
 
@@ -125,21 +141,11 @@ namespace Neggatrix.Presets
 
                 if (Input.IsDown(Keys.W) && physicsBody.IsGrounded)
                 {
+                    Game.Audio.PlaySound("D:\\Neggatrix\\Neggatrix\\Assets\\Audio\\Jump.mp3");
                     animator.AddTrack("Transform", "Rotation", 0f, 360f, 1f, true, () => !physicsBody.IsGrounded);
                 }
             };
             
-        }
-
-        public void TakeDamage(float amount)
-        {
-            Health -= amount;
-            if (Health < 0) Health = 0;
-        }
-        public void PowerUp(float amount)
-        {
-            Health += amount;
-            if (Health > 100) Health = 100;
         }
     }
 }

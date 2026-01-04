@@ -45,7 +45,7 @@ namespace Neggatrix.Components
             if (_audioManager != null && !string.IsNullOrEmpty(filePath))
             {
                 // Ensure PlaySpatialSound is defined in your AudioManager!
-                _spatialSound = _audioManager.PlaySpatialSound(filePath, Loop);
+                //_spatialSound = _audioManager.PlaySpatialSound(filePath, Loop);
             }
         }
 
@@ -95,3 +95,4 @@ namespace Neggatrix.Components
         }
     }
 }
+

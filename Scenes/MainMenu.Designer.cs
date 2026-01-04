@@ -40,6 +40,7 @@
             buttonsPanel2 = new TableLayoutPanel();
             storyButton = new Label();
             tutorialButton = new Label();
+            highScore = new Label();
             mainLayout.SuspendLayout();
             tableLayoutPanel1.SuspendLayout();
             buttonsPanel.SuspendLayout();
@@ -75,8 +76,9 @@
             titleLabel.Name = "titleLabel";
             titleLabel.Size = new Size(492, 111);
             titleLabel.TabIndex = 0;
-            titleLabel.Text = "WHISPERS OF THE GLOOMWOOD";
+            titleLabel.Text = "Neggatrix Protocol";
             titleLabel.TextAlign = ContentAlignment.BottomRight;
+            titleLabel.Click += titleLabel_Click;
             // 
             // tableLayoutPanel1
             // 
@@ -203,6 +205,7 @@
             buttonsPanel2.ColumnStyles.Add(new ColumnStyle(SizeType.Absolute, 20F));
             buttonsPanel2.Controls.Add(storyButton, 0, 0);
             buttonsPanel2.Controls.Add(tutorialButton, 0, 1);
+            buttonsPanel2.Controls.Add(highScore, 0, 2);
             buttonsPanel2.Dock = DockStyle.Fill;
             buttonsPanel2.Location = new Point(498, 111);
             buttonsPanel2.Margin = new Padding(0);
@@ -244,6 +247,17 @@
             tutorialButton.TextAlign = ContentAlignment.MiddleRight;
             tutorialButton.Click += tutorialButton_Click;
             // 
+            // highScore
+            // 
+            highScore.AutoSize = true;
+            highScore.Dock = DockStyle.Bottom;
+            highScore.Location = new Point(3, 429);
+            highScore.Name = "highScore";
+            highScore.Size = new Size(327, 15);
+            highScore.TabIndex = 2;
+            highScore.Text = "High Score: ";
+            highScore.TextAlign = ContentAlignment.MiddleCenter;
+            // 
             // MainMenu
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
@@ -274,5 +288,6 @@
         private TableLayoutPanel buttonsPanel2;
         private Label storyButton;
         private Label tutorialButton;
+        private Label highScore;
     }
 }

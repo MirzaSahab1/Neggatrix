@@ -33,6 +33,10 @@ namespace Neggatrix.Common
 
         public static void ShowView<T>(this Panel container) where T : UserControl, new()
         {
+            foreach (Control oldControl in container.Controls)
+            {
+                oldControl.Dispose();
+            }
             container.Controls.Clear();
             T view = new T();
             view.Dock = DockStyle.Fill;
